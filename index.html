@@ -59,6 +59,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
+html { overflow-x: hidden; }
 
 /* grain texture removed for performance */
 
@@ -427,7 +428,7 @@ body {
 
 /* Head */
 .nurture-head{
-  padding:36px 36px 28px;
+  padding:32px 28px 24px;
   border-bottom:1px solid var(--border);
   display:grid;
   grid-template-columns:1fr auto;
@@ -463,7 +464,7 @@ body {
   background:rgba(0,151,167,0.05);
   border:1px solid rgba(0,151,167,0.15);
   border-radius:6px;padding:24px;
-  text-align:center;min-width:200px;flex-shrink:0;
+  text-align:center;min-width:0;flex-shrink:1;width:100%;
 }
 
 .nurture-price-tag{
@@ -516,7 +517,7 @@ body {
 }
 
 .nurture-col{
-  padding:28px 36px;
+  padding:28px 24px;
   border-right:1px solid var(--border);
 }
 .nurture-col:last-child{border-right:none;}
@@ -797,7 +798,7 @@ section{padding:88px 0;position:relative;z-index:1;}
 
 .hero h1{
   font-family:'Barlow Condensed','Arial Narrow',sans-serif;
-  font-size:clamp(46px,8vw,88px);
+  font-size:clamp(38px,8vw,88px);
   font-weight:900;line-height:0.93;
   letter-spacing:0.01em;text-transform:uppercase;
   color:var(--white);margin-bottom:28px;
@@ -1810,7 +1811,7 @@ footer a:hover{color:var(--amber);}
 
 /* Head */
 .nurture-head{
-  padding:36px 36px 28px;
+  padding:32px 28px 24px;
   border-bottom:1px solid var(--border);
   display:grid;
   grid-template-columns:1fr auto;
@@ -1846,7 +1847,7 @@ footer a:hover{color:var(--amber);}
   background:rgba(0,151,167,0.05);
   border:1px solid rgba(0,151,167,0.15);
   border-radius:6px;padding:24px;
-  text-align:center;min-width:200px;flex-shrink:0;
+  text-align:center;min-width:0;flex-shrink:1;width:100%;
 }
 
 .nurture-price-tag{
@@ -1899,7 +1900,7 @@ footer a:hover{color:var(--amber);}
 }
 
 .nurture-col{
-  padding:28px 36px;
+  padding:28px 24px;
   border-right:1px solid var(--border);
 }
 .nurture-col:last-child{border-right:none;}
@@ -2125,6 +2126,173 @@ h1,h2,h3,.section-title,.hero h1 {
   font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
   size-adjust: 105%;
 }
+
+
+/* ═══════════════════════════════════════════════════
+   MOBILE OVERHAUL  complete responsive fix
+   Targets: all inline grids, font sizes, spacing,
+   overflow issues, and broken layouts on ≤600px
+═══════════════════════════════════════════════════ */
+
+/* ── Shared utility classes for inline grids ── */
+.mob-grid-3  { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.mob-grid-2  { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mob-grid-4c { display: grid; grid-template-columns: repeat(4,1fr); }
+.mob-col-2   { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.mob-col-3   { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.mob-founder { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; }
+.mob-how-head { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start; padding: 36px 36px 28px; border-bottom: 1px solid var(--border); }
+.mob-how-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.mob-stats-4  { display: grid; grid-template-columns: repeat(4,1fr); }
+
+@media (max-width: 900px) {
+  /* Offer grid */
+  .offer-grid { grid-template-columns: 1fr; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .bonuses-grid { grid-template-columns: 1fr; }
+  .proof-grid { grid-template-columns: 1fr; }
+  .gates-grid { grid-template-columns: 1fr 1fr; }
+  .gates-intro { grid-template-columns: 1fr; }
+  .tick-div, .cbar-div { display: none; }
+  .guarantee-box { flex-direction: column; text-align: center; }
+  .bonus-wide-inner { grid-template-columns: 1fr; }
+  .nurture-head { grid-template-columns: 1fr; }
+  .nurture-body { grid-template-columns: 1fr; }
+  .nurture-col { border-right: none; border-bottom: 1px solid var(--border); }
+  .nurture-col:last-child { border-bottom: none; }
+  .nurture-stats { grid-template-columns: 1fr 1fr; }
+  .ns-item:nth-child(2) { border-right: none; }
+  .ns-item:nth-child(3) { border-top: 1px solid var(--border); }
+  .ns-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+  .nurture-cta-strip { flex-direction: column; align-items: flex-start; }
+  .nurture-cta-btn { width: 100%; justify-content: center; }
+  .nurture-problem-bar { grid-template-columns: 1fr; }
+  .npb-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .npb-item:last-child { border-bottom: none; }
+
+  /* Inline grids  tablet */
+  .mob-grid-3  { grid-template-columns: 1fr 1fr; }
+  .mob-grid-4c { grid-template-columns: 1fr 1fr; }
+  .mob-stats-4 { grid-template-columns: 1fr 1fr; }
+  .mob-how-head { grid-template-columns: 1fr; padding: 24px; }
+  .mob-how-body { grid-template-columns: 1fr; }
+  .mob-founder { gap: 28px; }
+}
+
+@media (max-width: 600px) {
+  /* Base */
+  section { padding: 56px 0; }
+  .container { padding: 0 16px; }
+
+  /* Nav */
+  .nav-cta { display: none; }
+
+  /* Hero */
+  .hero { padding: 48px 0 56px; }
+  .hero h1 { font-size: clamp(36px, 11vw, 48px); line-height: 0.95; margin-bottom: 20px; }
+  .hero-eyebrow { font-size: 10px; margin-bottom: 20px; }
+  .hero-sub { font-size: 15px; margin-bottom: 32px; }
+  .hero-cta-row { flex-direction: column; gap: 10px; }
+  .btn { width: 100%; justify-content: center; font-size: 14px; padding: 14px 20px; }
+  .hero-gates { grid-template-columns: 1fr; gap: 6px; margin: 20px 0 18px; }
+  .hg-item { font-size: 13px; }
+  .hero-value-bar { padding: 14px 16px; margin-bottom: 24px; }
+  .hvb-text { font-size: 13px; }
+
+  /* Ticker */
+  .ticker { flex-direction: column; gap: 0; padding: 0; margin-top: 36px; }
+  .tick-item { padding: 16px 20px; border-bottom: 1px solid var(--border); width: 100%; text-align: left; display: flex; align-items: center; gap: 16px; }
+  .tick-num { font-size: 32px; margin-bottom: 0; min-width: 80px; }
+  .tick-label { font-size: 12px; }
+  .tick-sub { font-size: 11px; }
+
+  /* Section headings */
+  .section-title { font-size: clamp(28px, 9vw, 42px); margin-bottom: 14px; }
+  .section-sub { font-size: 15px; }
+  .label { font-size: 10px; margin-bottom: 12px; }
+
+  /* Pain section */
+  .pain-grid { grid-template-columns: 1fr; }
+  .pain-item { border-right: none; }
+  .pain-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .pain-item:last-child { border-bottom: none; }
+  .pain-bridge { padding: 20px; }
+  .pain-bridge p { font-size: 15px; }
+
+  /* Gates */
+  .gates-grid { grid-template-columns: 1fr; }
+  .gate-card { padding: 16px; }
+
+  /* Proof cards */
+  .proof-card { margin-bottom: 0; }
+  .proof-thumb { height: 160px; }
+
+  /* Sheet proof  4-col info bar → 2 col */
+  .mob-grid-4c { grid-template-columns: 1fr 1fr; }
+  .mob-stats-4 { grid-template-columns: 1fr 1fr; }
+
+  /* Inline grids  all collapse to 1 column */
+  .mob-grid-3  { grid-template-columns: 1fr; }
+  .mob-grid-2  { grid-template-columns: 1fr; }
+  .mob-col-2   { grid-template-columns: 1fr; }
+  .mob-col-3   { grid-template-columns: 1fr; }
+  .mob-founder { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+  .mob-founder > div:last-child { text-align: left; }
+  .mob-how-head { padding: 20px; gap: 16px; grid-template-columns: 1fr; }
+  .mob-how-body { grid-template-columns: 1fr; }
+
+  /* Guarantee */
+  .guarantee-story { padding: 24px 16px; }
+  .guarantee-box { flex-direction: column; text-align: center; padding: 20px 16px; }
+
+  /* Offer cards */
+  .offer-grid { max-width: 100%; }
+  .offer-head { padding: 22px 18px 18px; }
+  .offer-body { padding: 16px 18px 20px; }
+  .offer-price { font-size: 36px; }
+
+  /* Nurture section */
+  .nurture-head { padding: 24px 20px; }
+  .nurture-name { font-size: clamp(22px, 7vw, 32px); }
+  .nurture-col { padding: 22px 20px; }
+  .nurture-cta-strip { padding: 20px; }
+  .nurture-price { font-size: 36px; }
+  .nurture-price-panel { min-width: unset; }
+
+  /* Bonuses */
+  .bonuses-grid { grid-template-columns: 1fr; }
+  .bonus-card { padding: 20px; }
+
+  /* Testimonials */
+  .mob-grid-3 { grid-template-columns: 1fr; }
+
+  /* Founder section */
+  .mob-founder-stats { flex-direction: column; gap: 8px; }
+  .mob-founder-stats > div { width: 100%; }
+
+  /* FAQ */
+  .mob-grid-2 { grid-template-columns: 1fr; }
+
+  /* Close section */
+  .close-cta-row { flex-direction: column; }
+  .close-section h2 { font-size: clamp(32px, 10vw, 52px); }
+
+  /* Modal */
+  .qmodal-head, .qbody { padding-left: 16px; padding-right: 16px; }
+  .qprogress-wrap { padding-left: 16px; padding-right: 16px; }
+  .qfield-row { grid-template-columns: 1fr; }
+  .qresult { padding-left: 16px; padding-right: 16px; }
+  .qmodal-title { font-size: 22px; }
+  .qtitle { font-size: 15px; }
+
+  /* Footer */
+  footer { padding: 28px 0; }
+  footer p { font-size: 12px; }
+
+  /* Overflow guard  nothing bleeds off screen */
+  * { max-width: 100%; }
+  img { height: auto; }
+}
+
 </style>
 </head>
 <body>
@@ -2171,8 +2339,8 @@ h1,h2,h3,.section-title,.hero h1 {
       <div class="hg-item"><span class="hg-check">✓</span><span>Has not spoken to any other installer yet  you call first</span></div>
       <div class="hg-item"><span class="hg-check">✓</span><span>Within your exact service territory  no wasted fuel</span></div>
       <div class="hg-item"><span class="hg-check">✓</span><span>Expecting your call  gave their WhatsApp willingly</span></div>
-      <div class="hg-item hg-bonus"><span class="hg-check hg-check-green">+</span><span style="color:var(--green);"><strong>All leads </strong>screened and confirmed before getting to you</span></div
-      <div class="hg-item hg-bonus"><span class="hg-check hg-check-green">+</span><span style="color:var(--green);"><strong>Lock out your competitor, </strong>we do not take on another installer in your service area while your campaign is active</span></div>                                                                                                                                                                                              
+      <div class="hg-item hg-bonus"><span class="hg-check hg-check-green">+</span><span style="color:var(--green);"><strong>All leads screened and confirmed before getting to </strong>you</span></div>
+      <div class="hg-item hg-bonus"><span class="hg-check hg-check-green">+</span><span style="color:var(--green);"><strong>Lock out your competitor, </strong>we do not take on another installer in your service area while your campaign is active</span></div>
     </div>
 
     <!-- The closing argument -->
@@ -2241,7 +2409,7 @@ h1,h2,h3,.section-title,.hero h1 {
     <h2 class="section-title">What Installers Say<br><em>After the First Batch.</em></h2>
     <p class="section-sub" style="max-width:640px;margin-bottom:48px;">These are solar installers across Nigeria who started on Option 1. Same leads. Same system. Their words.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    <div class="mob-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
 
       <!-- Testimonial 1 -->
       <div style="background:var(--card);border:1px solid var(--border);border-top:3px solid var(--orange);border-radius:6px;padding:28px 24px;position:relative;">
@@ -2301,7 +2469,7 @@ h1,h2,h3,.section-title,.hero h1 {
 <div class="section-div"></div>
 <section style="padding:80px 0;background:var(--ink-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div class="container">
-    <div style="display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;max-width:860px;">
+    <div class="mob-founder" style="display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;max-width:860px;">
       <div style="flex-shrink:0;">
         <div style="width:160px;height:160px;border-radius:50%;overflow:hidden;border:3px solid rgba(21,101,192,0.4);box-shadow:0 0 0 6px rgba(21,101,192,0.08),0 0 0 12px rgba(249,168,37,0.06);">
           <img width="280" height="280" loading="lazy" decoding="async" src="data:image/jpeg;base64,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" alt="Alajayibo Mystery  Founder, Tubalcain Agency" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -2321,7 +2489,7 @@ h1,h2,h3,.section-title,.hero h1 {
         </h3>
         <p style="font-size:16px;color:#8BAAD0;line-height:1.85;margin-bottom:16px;">I have been running Facebook ads for over 3 years. When I started working with the solar industry, I kept seeing the same mistake  installers running ads that sent people directly to their WhatsApp. Every click cost money. A curious student, a renter, someone just comparing prices  all clicking, all costing you.</p>
         <p style="font-size:16px;color:#8BAAD0;line-height:1.85;margin-bottom:24px;">So I built a system that sits between the Facebook ad and your WhatsApp. Eight gates. Wrong answer on any one of them  they never reach you and you never pay. <strong style="color:var(--white);">You only pay when someone genuinely ready to buy arrives in your inbox.</strong></p>
-        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <div class="mob-founder-stats" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
           <div style="display:flex;align-items:center;gap:8px;background:rgba(21,101,192,0.08);border:1px solid rgba(21,101,192,0.2);border-radius:4px;padding:10px 16px;">
             <span style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:#1565C0;line-height:1;">3+</span>
             <span style="font-size:11px;color:var(--grey);line-height:1.4;font-weight:600;">Years running<br>Facebook Ads</span>
@@ -2513,7 +2681,7 @@ h1,h2,h3,.section-title,.hero h1 {
     <h2 class="section-title">How You Get <em>More</em><br>From the Same Facebook Budget.</h2>
     <p class="section-sub">You are already spending on Facebook every week. That does not change. What changes is what comes out of it  because now every naira of that spend runs through our 8-gate qualification system before a single lead reaches your phone.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-top:48px;">
+    <div class="mob-grid-4c" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-top:48px;">
 
       <div style="padding:28px 22px;border-right:1px solid var(--border);position:relative;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;color:rgba(21,101,192,0.08);line-height:1;margin-bottom:10px;">01</div>
@@ -2611,7 +2779,7 @@ h1,h2,h3,.section-title,.hero h1 {
     <h2 class="section-title">The Actual Google Sheet.<br><em>Every Lead. Every Timestamp.</em></h2>
     <p class="section-sub" style="max-width:680px;">This is the live delivery log  not a report, not a widget. Every row is a real homeowner who passed all 8 gates. Timestamp in Column A. Name, phone, city, budget, and timeline  all captured the moment they qualified.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin:36px 0 32px;">
+    <div class="mob-grid-4c" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin:36px 0 32px;">
       <div style="padding:18px 16px;border-right:1px solid var(--border);text-align:center;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;">Column A</div>
         <div style="font-size:13px;color:var(--grey);line-height:1.5;">Timestamp  exact date and time each lead qualified</div>
@@ -2664,7 +2832,7 @@ h1,h2,h3,.section-title,.hero h1 {
 
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:24px;">
+    <div class="mob-col-3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:24px;">
       <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 4px 4px 0;padding:16px 18px;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">42 Leads. 42 Rows.</div>
         <div style="font-size:13px;color:var(--grey);line-height:1.6;">Every single entry tagged "qualified-lead" in Column B. Not one unqualified record in the sheet  those never pass the filter.</div>
@@ -2939,13 +3107,13 @@ h1,h2,h3,.section-title,.hero h1 {
     <div style="background:var(--card);border:1px solid rgba(21,101,192,0.2);border-top:3px solid var(--orange);border-radius:6px;overflow:hidden;margin-top:48px;">
 
       <!-- Head -->
-      <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:36px 36px 28px;border-bottom:1px solid var(--border);">
+      <div class="mob-how-head" style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:36px 36px 28px;border-bottom:1px solid var(--border);">
         <div>
           <div class="label">Pay-Per-Lead Delivery System</div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(26px,4vw,42px);font-weight:900;letter-spacing:0.02em;text-transform:uppercase;color:var(--white);line-height:1;margin-bottom:10px;">Performance <span style="color:var(--orange);">Partner</span><br>Programme</div>
           <p style="font-size:15px;color:var(--grey);line-height:1.7;max-width:520px;">You keep full transparency over your ad spend. We earn only when we deliver Results. Every lead you pay for has already passed 8 quality gates  budget verified, ownership confirmed, timeline set, home assessed.</p>
         </div>
-        <div style="background:rgba(21,101,192,0.06);border:1px solid rgba(21,101,192,0.18);border-radius:6px;padding:24px;text-align:center;min-width:200px;flex-shrink:0;">
+        <div style="background:rgba(21,101,192,0.06);border:1px solid rgba(21,101,192,0.18);border-radius:6px;padding:24px;text-align:center;min-width:0;flex-shrink:1;width:100%;">
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Your Cost Per Lead</div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;color:var(--orange);line-height:1;margin-bottom:4px;">₦5,000</div>
           <div style="font-size:11px;color:var(--grey-2);font-weight:600;line-height:1.5;">per qualified Lead</div>
@@ -2959,7 +3127,7 @@ h1,h2,h3,.section-title,.hero h1 {
       </div>
 
       <!-- Body: includes + payment flow -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+      <div class="mob-how-body" style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
 
         <div style="padding:28px 36px;border-right:1px solid var(--border);">
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">What Is Included</div>
@@ -3017,7 +3185,7 @@ h1,h2,h3,.section-title,.hero h1 {
       </div>
 
       <!-- Stats -->
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);">
+      <div class="mob-stats-4" style="display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);">
         <div style="padding:20px;text-align:center;border-right:1px solid var(--border);">
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--orange);line-height:1;margin-bottom:4px;">₦0</div>
           <div style="font-size:10px;color:var(--grey-2);font-weight:600;">Upfront / Retainer</div>
@@ -3260,7 +3428,7 @@ Talks About.</em></h2>
     <p class="section-sub" style="max-width:680px;">Two ways to start. One smart upgrade path. Begin with Option 1 to verify the lead quality. Add follow-up once you are satisfied  or take everything in Option 3 at the best combined price.</p>
 
     <!-- Three offer cards -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:48px;align-items:start;">
+    <div class="mob-col-3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:48px;align-items:start;">
 
       <!-- Card 1: Lead Only -->
       <div style="background:var(--card);border:1px solid var(--border);border-top:3px solid var(--blue-2, #1565C0);border-radius:6px;overflow:hidden;transition:transform 0.25s;">
@@ -3376,7 +3544,7 @@ Talks About.</em></h2>
     <h2 class="section-title">Questions Installers<br><em>Always Ask First.</em></h2>
     <p class="section-sub" style="max-width:600px;margin-bottom:52px;">Before you apply, here are the answers to the questions every installer asks before their first batch.</p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:960px;">
+    <div class="mob-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:960px;">
 
       <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:24px;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--white);margin-bottom:10px;">What if a lead does not pick up their phone?</div>
