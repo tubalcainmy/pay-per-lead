@@ -2225,6 +2225,9 @@ h1,h2,h3,.section-title,.hero h1 {
   .hg-item { font-size: 13px; }
   .hero-value-bar { padding: 14px 16px; margin-bottom: 24px; }
   .hvb-text { font-size: 13px; }
+  .hvb-steps { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .hvb-steps > div { padding: 0 !important; border-right: none !important; border-bottom: 1px solid var(--border); padding-bottom: 14px !important; }
+  .hvb-steps > div:last-child { border-bottom: none; padding-bottom: 0 !important; }
 
   /* Ticker */
   .ticker { flex-direction: column; gap: 0; padding: 0; margin-top: 36px; }
@@ -2319,6 +2322,62 @@ h1,h2,h3,.section-title,.hero h1 {
   /* Overflow guard  nothing bleeds off screen */
   * { max-width: 100%; }
   img { height: auto; }
+
+  /* Sticky mobile CTA bar */
+  .mob-sticky-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(5,13,26,0.97);
+    border-top: 1px solid var(--border-2);
+    padding: 12px 16px;
+    z-index: 500;
+    gap: 10px;
+    align-items: center;
+  }
+  .mob-sticky-cta a {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 800;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 14px 20px; border-radius: 4px;
+    text-decoration: none;
+  }
+  body { padding-bottom: 70px; }
+}
+
+/* Exit intent popup */
+.exit-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.88);
+  z-index: 8000;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.exit-overlay.open { display: flex; animation: qFadeIn 0.25s ease both; }
+.exit-box {
+  background: var(--card);
+  border: 1px solid var(--border-2);
+  border-top: 3px solid var(--orange);
+  border-radius: 6px;
+  max-width: 480px; width: 100%;
+  padding: 36px 32px 32px;
+  position: relative; text-align: center;
+}
+.exit-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 28px; height: 28px;
+  background: var(--border); border: none; border-radius: 50%;
+  color: var(--grey); font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.exit-close:hover { color: var(--white); }
+@media (max-width: 600px) {
+  .exit-box { padding: 28px 20px 24px; }
 }
 
 
@@ -2569,13 +2628,26 @@ h1,h2,h3,.section-title,.hero h1 {
       <!--<div class="hg-item hg-bonus"><span class="hg-check hg-check-green">+</span><span style="color:var(--green);"><strong>Currently serving solar installers in </strong>Lagos, Abuja, Port Harcourt, Benin City, and Warri.</span></div>-->
     </div>
 
-    <!-- The closing argument -->
-    <div class="hero-value-bar">
-      <div class="hvb-icon">💡</div>
-            <p class="hvb-text">
-        <p class="hvb-text">
-        <strong>How it works: </strong>You do nothing except take calls. We build the campaign, write the ads, run the qualification system, and deliver Verified Buyers to your WhatsApp all within 48 hours of onboarding. Most installers receive their first verified buyer within 2 to 3 days. There are two separate investment when you use our system.<br><strong>① Campaign Deposit - paid by you to Facebook. A minimum of ₦50,000</strong> goes into the Tubalcain ad account to run your campaign it covers the cost of driving traffic to the 8 gate qualification system which then filter out time waster and anyone not ready to buy. You control this investment and I notify you when it needs topping up.<br><strong>② Tubalcain service charge - ₦5,000 per verified buyer, paid to Tubalcain </strong>This covers Ad's creative & copy design, campaign setup and optimization, the cost of running our qualification system, real time leads delivery etc. You only pay this after a verified buyer arrives on your WhatsApp. <strong>No verified buyer delivered in a week, no Tubalcain charge, plus we keep running your ad's campaign FREE of campaign deposit, until we deliver 10 verified buyers to you.</strong><br><strong>Total to get started: ₦50,000 campaign deposit + ₦5,000 per verified buyer billed on delivery.</strong> We do not work on commission. This is a pay-per-lead service, you fund the campaign deposit and only pay ₦5,000 per verified buyer delivered. No exceptions.
-        </p>
+    <!-- How it works: 3-step visual -->
+    <div class="hero-value-bar" style="padding:20px 24px;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">How It Works — 3 Steps</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;" class="hvb-steps">
+        <div style="padding-right:20px;border-right:1px solid var(--border);">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;color:var(--orange);line-height:1;margin-bottom:8px;">①</div>
+          <div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px;">Fund Your Facebook Campaign</div>
+          <div style="font-size:12px;color:var(--grey);line-height:1.6;">Send ₦50,000 minimum directly to Facebook — not to us. You control it. We manage the campaign inside your budget.</div>
+        </div>
+        <div style="padding:0 20px;border-right:1px solid var(--border);">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;color:var(--orange);line-height:1;margin-bottom:8px;">②</div>
+          <div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px;">8 Gates Filter Every Click</div>
+          <div style="font-size:12px;color:var(--grey);line-height:1.6;">Wrong answer on any gate — disqualified automatically. Budget, ownership, timeline, and 5 more checks run before a lead exists.</div>
+        </div>
+        <div style="padding-left:20px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;color:var(--amber);line-height:1;margin-bottom:8px;">③</div>
+          <div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px;">Verified Buyer Hits Your WhatsApp</div>
+          <div style="font-size:12px;color:var(--grey);line-height:1.6;">You pay <strong style="color:var(--white);">₦5,000</strong> only after delivery. No buyer in a week? No charge — and we keep running your ads free until 10 buyers arrive.</div>
+        </div>
+      </div>
     </div>
 
     <div class="hero-cta-row">
@@ -2618,6 +2690,12 @@ h1,h2,h3,.section-title,.hero h1 {
         <div class="tick-num">1</div>
         <div class="tick-label">Installer Per City</div>
         <div class="tick-sub">Your territory only</div>
+      </div>
+      <div class="tick-div"></div>
+      <div class="tick-item">
+        <div class="tick-num" style="font-size:22px;line-height:1.1;">₦50k</div>
+        <div class="tick-label">Goes to Facebook</div>
+        <div class="tick-sub" style="color:var(--amber);">Not to us — you control it</div>
       </div>
     </div>
   </div>
@@ -2684,7 +2762,7 @@ h1,h2,h3,.section-title,.hero h1 {
     <!-- Trust note -->
     <div style="margin-top:24px;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
       <div style="font-size:13px;color:var(--grey-2);line-height:1.6;flex:1;">These installers started with &#x20A6;50,000 campaign deposit, no upfront, pay per verified buyer. Results depend on how fast you call and your installation capacity. The prospect are real. The closing is yours.</div>
-      <a href="#" class="btn btn-primary" onclick="openQualifier('hero');return false;" style="white-space:nowrap;">Get My First Leads <span class="btn-arrow">&#x2192;</span></a>
+      <a href="#" class="btn btn-primary" onclick="openQualifier('hero');return false;" style="white-space:nowrap;">Check If My City Is Open <span class="btn-arrow">&#x2192;</span></a>
     </div>
 
   </div>
@@ -2964,6 +3042,10 @@ h1,h2,h3,.section-title,.hero h1 {
     <div class="label">Proof  Not a Pitch</div>
     <h2 class="section-title">"38% Close Rate" <em>This Is What 8-Gate Leads</em><span class="amb"> Look Like in Practice.</span></h2>
     <p class="section-sub">These are direct recordings from live ad accounts and real client dashboards  not mock-ups, not stock footage. Watch what happens when every prospect is filtered before it reaches a WhatsApp.</p>
+
+    <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(239,83,80,0.07);border:1px solid rgba(239,83,80,0.18);border-radius:4px;padding:10px 18px;margin-bottom:32px;font-size:13px;color:#EF9A9A;font-weight:600;">
+      <span style="font-size:16px;">▶</span> Watch: A verified buyer landing in an installer's WhatsApp in real time — recorded live from a live ad account, not staged.
+    </div>
 
     <div class="proof-grid">
 
@@ -3544,7 +3626,13 @@ h1,h2,h3,.section-title,.hero h1 {
     <!-- Bottom note -->
     <div style="text-align:center;margin-top:32px;padding:20px 28px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:6px;max-width:560px;margin-left:auto;margin-right:auto;">
       <p style="font-size:13px;color:var(--grey-2);line-height:1.7;margin:0;">Before you apply, see the qualification system verified buyers complete: <a href="https://tubalcainmy.github.io/solar-lead-qualifier-demo/" target="_blank" rel="noopener" style="color:var(--orange);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(21,101,192,0.3);">Go through the system live →</a></p>
-      <div style="margin-top:12px;"><span style="display:inline-flex;align-items:center;gap:6px;background:rgba(21,101,192,0.1);border:1px solid rgba(21,101,192,0.2);color:var(--amber);font-size:12px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:5px 14px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--orange);animation:blink 1.5s infinite;display:inline-block;"></span>4 installer slots currently open across Nigeria</span></div>
+      <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Lagos — Open</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Abuja — Open</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(239,83,80,0.08);border:1px solid rgba(239,83,80,0.2);color:var(--red);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;">Port Harcourt — Taken</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Benin City — Open</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Warri — Open</span>
+      </div>
     </div>
 
   </div>
@@ -3634,14 +3722,42 @@ h1,h2,h3,.section-title,.hero h1 {
       </a>
     </div>
 
-    <div class="close-scarcity">
-      <span class="sc-dot"></span>
-      4 installer slots currently open across Nigeria
+    <div class="close-scarcity" style="flex-direction:column;align-items:center;gap:10px;">
+      <div style="font-size:12px;color:var(--grey);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;">City Slot Status</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Lagos — Open</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Abuja — Open</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(239,83,80,0.08);border:1px solid rgba(239,83,80,0.2);color:var(--red);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;">Port Harcourt — Taken</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Benin City — Open</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Warri — Open</span>
+      </div>
     </div>
   </div>
 </section>
 
 
+
+<!-- Sticky mobile CTA bar (hidden on desktop via media query) -->
+<div class="mob-sticky-cta" id="mobStickyCta">
+  <a href="#" onclick="openQualifier('mob-sticky');return false;">
+    Check If My City Is Open →
+  </a>
+</div>
+
+<!-- Exit intent popup -->
+<div class="exit-overlay" id="exitOverlay">
+  <div class="exit-box">
+    <button class="exit-close" onclick="closeExit()" aria-label="Close">✕</button>
+    <div style="font-size:36px;margin-bottom:12px;">⚡</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Before You Go</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:0.02em;color:var(--white);line-height:1.05;margin-bottom:12px;">Your City Slot<br>Might Still Be Open.</div>
+    <p style="font-size:14px;color:var(--grey);line-height:1.7;margin-bottom:24px;">Takes 30 seconds to check. No upfront fee — you only pay ₦5,000 after a verified buyer lands in your WhatsApp.</p>
+    <a href="#" onclick="closeExit();openQualifier('exit-intent');return false;" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 20px;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#fff;text-decoration:none;background:var(--orange);cursor:pointer;margin-bottom:10px;">
+      Check My City — 30 Seconds →
+    </a>
+    <button onclick="closeExit()" style="width:100%;background:transparent;border:1px solid var(--border-2);color:var(--grey);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:10px;border-radius:4px;cursor:pointer;">No thanks, I'll pass</button>
+  </div>
+</div>
 
 <footer>
   <div class="container">
@@ -3666,7 +3782,7 @@ h1,h2,h3,.section-title,.hero h1 {
     <div class="qmodal-head">
       <div class="qmodal-eyebrow">Partner Access Request</div>
       <div class="qmodal-title">You Are One Step Away From Your First <br>Qualified Lead</div>
-      <div class="qmodal-sub">Let's confirm your city slot, answer 5 quick questions so Mystery can personally confirm your city slot and set up your campaign.</div>
+      <div class="qmodal-sub">3 quick questions — then we confirm your city slot and Mystery personally sets up your campaign within 48 hours.</div>
     </div>
 
     <!-- Progress -->
@@ -3678,9 +3794,7 @@ h1,h2,h3,.section-title,.hero h1 {
         <div class="qstep-line" id="sl2"></div>
         <div class="qstep-node" id="sn3">3</div>
         <div class="qstep-line" id="sl3"></div>
-        <div class="qstep-node" id="sn4">4</div>
-        <div class="qstep-line" id="sl4"></div>
-        <div class="qstep-node" id="sn5">✓</div>
+        <div class="qstep-node" id="sn4">✓</div>
       </div>
       <div class="qprogress-bar-track">
         <div class="qprogress-bar-fill" id="qProgressFill"></div>
@@ -3692,7 +3806,7 @@ h1,h2,h3,.section-title,.hero h1 {
 
       <!-- Q1  Ad Spend (KEY QUALIFIER) -->
       <div class="qblock active" id="qq1">
-        <div class="qlabel">Question 1 of 4  Marketing</div>
+        <div class="qlabel">Question 1 of 3  Your Business</div>
         <div class="qtitle">Do you currently offer Installmental payment or financing options as part off your payment options?</div>
         <div class="qsub">This tells us whether our system will deliver a meaningful return on your investment.</div>
         <div class="qoptions">
@@ -3721,7 +3835,7 @@ h1,h2,h3,.section-title,.hero h1 {
 
       <!-- Q2  Installations per month -->
       <div class="qblock" id="qq2">
-        <div class="qlabel">Question 2 of 4  Capacity</div>
+        <div class="qlabel">Question 2 of 3  Capacity</div>
         <div class="qtitle">How many residential solar installations does your team complete per month?</div>
         <div class="qsub">Be honest  this helps us confirm our lead volume is the right fit for your operation.</div>
         <div class="qoptions">
@@ -3745,43 +3859,13 @@ h1,h2,h3,.section-title,.hero h1 {
         <div class="qerr" id="qerr2">Please select an option to continue.</div>
         <div class="qnav">
           <button class="qbtn-back" onclick="prevQ(1)">← Back</button>
-          <button class="qbtn-next" onclick="nextQ(2)">Continue <span>→</span></button>
-        </div>
-      </div>
-
-      <!-- Q3  Pain point -->
-      <div class="qblock" id="qq3">
-        <div class="qlabel">Question 3 of 4  Your Situation</div>
-        <div class="qtitle">What is your biggest frustration with leads right now?</div>
-        <div class="qsub">Choose the one that hurts most  this helps us personalise your onboarding.</div>
-        <div class="qoptions">
-          <button class="qoption" data-q="3" data-val="not-enough-leads" onclick="selectQ(this)">
-            <div class="qopt-radio"></div>
-            <span class="qopt-text">Not enough leads  my team has capacity but no consistent pipeline</span>
-          </button>
-          <button class="qoption" data-q="3" data-val="time-wasters" onclick="selectQ(this)">
-            <div class="qopt-radio"></div>
-            <span class="qopt-text">Too many time-wasters  people enquire but can't afford it or aren't serious</span>
-          </button>
-          <button class="qoption" data-q="3" data-val="inconsistent-revenue" onclick="selectQ(this)">
-            <div class="qopt-radio"></div>
-            <span class="qopt-text">Inconsistent monthly revenue  some months strong, others dangerously slow</span>
-          </button>
-          <button class="qoption" data-q="3" data-val="closing-rate" onclick="selectQ(this)">
-            <div class="qopt-radio"></div>
-            <span class="qopt-text">Low closing rate  I get leads but struggle to convert them to paid jobs</span>
-          </button>
-        </div>
-        <div class="qerr" id="qerr3">Please select an option to continue.</div>
-        <div class="qnav">
-          <button class="qbtn-back" onclick="prevQ(2)">← Back</button>
-          <button class="qbtn-next" onclick="nextQ(3)">Continue <span>→</span></button>
+          <button class="qbtn-next" onclick="skipToQ4()">Continue <span>→</span></button>
         </div>
       </div>
 
       <!-- Q4  Readiness -->
       <div class="qblock" id="qq4">
-        <div class="qlabel">Question 4 of 4  Readiness</div>
+        <div class="qlabel">Question 3 of 3  Readiness</div>
         <div class="qtitle">To launch your campaign, a minimum ₦50,000 ad budget is required upfront to fund your Facebook ads. This is separate from the ₦5,000 per lead fee. Are you comfortable with this?</div>
         <div class="qsub">Leads only convert when the installer is operationally ready. Be honest  no wrong answer here.</div>
         <div class="qoptions">
@@ -3800,7 +3884,7 @@ h1,h2,h3,.section-title,.hero h1 {
         </div>
         <div class="qerr" id="qerr4">Please select an option to continue.</div>
         <div class="qnav">
-          <button class="qbtn-back" onclick="prevQ(3)">← Back</button>
+          <button class="qbtn-back" onclick="prevQ(2)">← Back</button>
           <button class="qbtn-next" onclick="nextQ(4)">Continue <span>→</span></button>
         </div>
       </div>
@@ -3823,7 +3907,11 @@ h1,h2,h3,.section-title,.hero h1 {
           </div>
           <div class="qfield">
             <label>WhatsApp Number</label>
-            <input type="tel" id="qphone" placeholder="e.g. 08012345678" autocomplete="tel">
+            <div style="position:relative;">
+              <input type="tel" id="qphone" placeholder="e.g. 08012345678 or +2348012345678" autocomplete="tel" oninput="validatePhoneLive(this)" style="padding-right:40px;">
+              <span id="qphoneStatus" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:14px;display:none;pointer-events:none;"></span>
+            </div>
+            <div id="qphoneHint" style="font-size:11px;color:var(--grey);margin-top:4px;">Nigerian number: 08012345678 or +2348012345678</div>
           </div>
           <div class="qfield">
             <label>Your City</label>
@@ -3952,20 +4040,33 @@ function prevQ(to) {
   updateQProgress(to);
 }
 
+function skipToQ4() {
+  if (!qAnswers[2]) {
+    document.getElementById('qerr2').style.display = 'block';
+    return;
+  }
+  document.getElementById('qq2').classList.remove('active');
+  document.getElementById('qq4').classList.add('active');
+  updateQProgress(3);
+}
+
 function updateQProgress(step) {
   qCurrent = step;
-  const totalSteps = 5;
+  const totalSteps = 4;
   const pct = ((step - 1) / (totalSteps - 1)) * 100;
   document.getElementById('qProgressFill').style.width = pct + '%';
+  // Map display steps: Q1→1, Q2→2, Q4→3, Q5(contact)→4
+  const displayMap = { 1: 1, 2: 2, 4: 3, 5: 4 };
+  const displayStep = displayMap[step] || step;
   for (let i = 1; i <= totalSteps; i++) {
     const node = document.getElementById('sn'+i);
     const line = document.getElementById('sl'+i);
     if (!node) continue;
     node.classList.remove('active','done');
-    if (i < step)      { node.classList.add('done'); node.textContent = '✓'; }
-    else if (i === step) { node.classList.add('active'); node.textContent = i; }
-    else                { node.textContent = i === 5 ? '✓' : i; }
-    if (line) line.classList.toggle('done', i < step);
+    if (i < displayStep)        { node.classList.add('done'); node.textContent = '✓'; }
+    else if (i === displayStep)  { node.classList.add('active'); node.textContent = i; }
+    else                         { node.textContent = i === totalSteps ? '✓' : i; }
+    if (line) line.classList.toggle('done', i < displayStep);
   }
 }
 
@@ -3993,8 +4094,33 @@ async function submitQualifier() {
   const city  = document.getElementById('qcity').value.trim();
   const errEl = document.getElementById('qerr5');
 
+  // Field presence check
   if (!first || !last || !phone || !city) {
     errEl.textContent = 'Please fill in all fields to continue.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  // Nigerian phone validation: 08xx, 07xx, 09xx, +2348xx, 2348xx — 11 digits local or 13 with country code
+  const phoneClean = phone.replace(/[\s\-().]/g, '');
+  const ngPattern = /^(\+?234|0)(7[0-9]|8[0-9]|9[0-9])[0-9]{8}$/;
+  if (!ngPattern.test(phoneClean)) {
+    errEl.textContent = 'Enter a valid Nigerian WhatsApp number (e.g. 08012345678 or +2348012345678).';
+    errEl.style.display = 'block';
+    document.getElementById('qphone').focus();
+    return;
+  }
+
+  // Name sanity: at least 2 characters each, no numbers
+  if (first.length < 2 || last.length < 2) {
+    errEl.textContent = 'Please enter your full first and last name.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  // City sanity: at least 2 chars
+  if (city.length < 2) {
+    errEl.textContent = 'Please enter a valid city name.';
     errEl.style.display = 'block';
     return;
   }
@@ -4061,6 +4187,8 @@ async function submitQualifier() {
     hero:            'I want to check if my city is still open',
     nav:             'I want to check if my city is still open',
     close:           'I want to check if my city is still open for the lead service',
+    'mob-sticky':    'I want to check if my city is still open',
+    'exit-intent':   'I want to check if my city is still open',
   };
   const msgBase = packageMap[qSource] || 'I want to check if my city is still open';
   const waMsg = encodeURIComponent(
@@ -4079,6 +4207,87 @@ async function submitQualifier() {
   btn.disabled = false;
   btn.textContent = 'Check My City →';
 }
+
+/* ═══════════════════════════
+   PHONE LIVE VALIDATION
+═══════════════════════════ */
+function validatePhoneLive(input) {
+  const val = input.value.replace(/[\s\-().]/g, '');
+  const status = document.getElementById('qphoneStatus');
+  const hint   = document.getElementById('qphoneHint');
+  const ngPattern = /^(\+?234|0)(7[0-9]|8[0-9]|9[0-9])[0-9]{8}$/;
+
+  if (val.length === 0) {
+    status.style.display = 'none';
+    input.style.borderColor = '';
+    hint.style.color = 'var(--grey)';
+    hint.textContent = 'Nigerian number: 08012345678 or +2348012345678';
+    return;
+  }
+
+  if (ngPattern.test(val)) {
+    status.textContent = '✓';
+    status.style.display = 'block';
+    status.style.color = 'var(--green)';
+    input.style.borderColor = 'var(--green)';
+    hint.style.color = 'var(--green)';
+    hint.textContent = 'Valid Nigerian number ✓';
+  } else {
+    status.textContent = '✕';
+    status.style.display = 'block';
+    status.style.color = 'var(--red)';
+    input.style.borderColor = 'var(--red)';
+    hint.style.color = 'var(--red)';
+    if (val.length < 7) {
+      hint.textContent = 'Keep typing…';
+    } else {
+      hint.textContent = 'Must start with 07, 08, 09, +234 — 11 digits';
+    }
+  }
+}
+
+/* ═══════════════════════════
+   EXIT INTENT
+═══════════════════════════ */
+let exitShown = false;
+let exitDismissed = false;
+
+function closeExit() {
+  document.getElementById('exitOverlay').classList.remove('open');
+  exitDismissed = true;
+}
+
+document.addEventListener('mouseleave', function(e) {
+  if (e.clientY <= 0 && !exitShown && !exitDismissed) {
+    const overlay = document.getElementById('qOverlay');
+    if (overlay && overlay.classList.contains('open')) return;
+    exitShown = true;
+    document.getElementById('exitOverlay').classList.add('open');
+    if (typeof gtag !== 'undefined') gtag('event', 'exit_intent_shown', { event_category: 'Engagement' });
+  }
+});
+
+document.getElementById('exitOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeExit();
+});
+
+/* ═══════════════════════════
+   MOBILE STICKY CTA — hide when qualifier is open
+═══════════════════════════ */
+(function() {
+  const origOpen  = window.openQualifier;
+  const origClose = window.closeQualifier;
+  const bar = document.getElementById('mobStickyCta');
+
+  window.openQualifier = function(src) {
+    if (bar) bar.style.display = 'none';
+    origOpen(src);
+  };
+  window.closeQualifier = function() {
+    if (bar) bar.style.display = '';
+    origClose();
+  };
+})();
 
 </script>
 <!-- Meta Pixel -->
