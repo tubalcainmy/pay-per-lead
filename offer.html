@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tubalcain Agency — Pay ₦4,000 Per Qualified Solar Lead | Nigeria</title>
-<meta name="description" content="No upfront fees. No retainers. Pay ₦4,000 only when a pre-qualified solar homeowner lands in your WhatsApp — 8-gate qualified, budget confirmed, 90-day install timeline set. Performance-based lead generation for Nigerian solar installers.">
+<title>Tubalcain Agency — Pay ₦5,000 Per Verified Solar Buyer | Nigeria</title>
+<meta name="description" content="No upfront fees. No retainers. Pay ₦5,000 only when a verified solar buyer lands in your WhatsApp — 8-gate qualified, budget confirmed, 90-day install timeline set. Performance-based lead generation for Nigerian solar installers.">
 
 
   <!-- Performance hints -->
@@ -85,7 +85,19 @@ html { overflow-x: hidden; }
   animation: qFadeIn 0.25s ease both;
 }
 
+@keyframes qFadeIn { from { opacity:0; transform:scale(0.97); } to { opacity:1; transform:scale(1); } }
 
+.qmodal {
+  background: var(--card);
+  border: 1px solid var(--border-2);
+  border-top: 3px solid var(--orange);
+  border-radius: 6px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
 
 .qmodal-close {
   position: absolute;
@@ -2583,6 +2595,72 @@ h1,h2,h3,.section-title,.hero h1 {
   .hop-card-wide { grid-column: span 1; }
 }
 
+/* ── FAQ accordion ── */
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:first-child { border-top: 1px solid var(--border); }
+.faq-item--highlight .faq-q { border-left: 3px solid var(--orange); padding-left: 21px; }
+.faq-q {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: transparent; border: none; padding: 20px 0; cursor: pointer; text-align: left;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--white); transition: color 0.2s;
+}
+.faq-q:hover { color: var(--amber); }
+.faq-chevron { flex-shrink: 0; font-size: 18px; color: var(--grey); transition: transform 0.25s; line-height: 1; }
+.faq-q[aria-expanded="true"] .faq-chevron { transform: rotate(180deg); color: var(--orange); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-a.open { max-height: 600px; }
+.faq-a > p { margin: 0; padding-bottom: 20px; font-size: 13px; color: var(--grey); line-height: 1.75; }
+
+/* ── Exit intent ── */
+.exit-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  z-index: 9500; align-items: center; justify-content: center; padding: 20px;
+}
+.exit-overlay.open { display: flex; animation: qFadeIn 0.25s ease both; }
+.exit-box {
+  background: var(--card); border: 1px solid var(--border-2); border-top: 3px solid var(--orange);
+  border-radius: 6px; padding: 36px 32px; max-width: 400px; width: 100%; position: relative; text-align: center;
+}
+.exit-close {
+  position: absolute; top: 12px; right: 12px; width: 28px; height: 28px;
+  background: var(--border); border: none; border-radius: 50%; color: var(--grey);
+  font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.exit-close:hover { background: var(--border-2); color: var(--white); }
+
+/* ── Mobile sticky CTA ── */
+@media(max-width: 600px) {
+  .mob-sticky-cta {
+    display: flex; position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(5,13,26,0.97); border-top: 1px solid var(--border-2);
+    padding: 12px 16px; z-index: 500; gap: 10px; align-items: center;
+  }
+  .mob-sticky-cta a {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--orange); color: #fff; font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 14px 20px; border-radius: 4px; text-decoration: none;
+  }
+  body { padding-bottom: 70px; }
+}
+@media(min-width: 601px) {
+  .mob-sticky-cta { display: none; }
+}
+
+/* ── Checkout success screen ── */
+.qcheckout-header { text-align: center; padding: 28px 24px 20px; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, rgba(21,101,192,0.06) 0%, transparent 100%); }
+.qcheckout-section { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+.qcheckout-bonus { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(14,32,64,0.5); }
+.qcheckout-bonus:last-child { border-bottom: none; }
+.qcheckout-footer { position: sticky; bottom: 0; background: var(--card); border-top: 2px solid var(--orange); padding: 20px 24px; text-align: center; }
+
+/* ── Phone status inline ── */
+.qphone-wrap { position: relative; }
+.qphone-wrap input { padding-right: 40px; }
+.qphone-status { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 16px; font-weight: 700; display: none; }
+.qphone-hint { font-size: 11px; color: var(--grey); margin-top: 4px; }
+
 </style>
 </head>
 <body>
@@ -2787,7 +2865,7 @@ h1,h2,h3,.section-title,.hero h1 {
 
     <!-- Trust note -->
     <div style="margin-top:24px;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-      <div style="font-size:13px;color:var(--grey-2);line-height:1.6;flex:1;">These installers started on Option 1 — leads only, no upfront, pay per qualified homeowner. Results depend on how fast you call and your installation capacity. The leads are real. The closing is yours.</div>
+      <div style="font-size:13px;color:var(--grey-2);line-height:1.6;flex:1;">These installers started on Option 1 — leads only, no upfront, pay per verified buyer. Results depend on how fast you call and your installation capacity. The leads are real. The closing is yours.</div>
       <a href="#" class="btn btn-primary" onclick="openQualifier('hero');return false;" style="white-space:nowrap;">Get My First Leads <span class="btn-arrow">&#x2192;</span></a>
     </div>
 
@@ -3050,11 +3128,11 @@ h1,h2,h3,.section-title,.hero h1 {
       <div style="padding:28px 22px;border-right:1px solid var(--border);position:relative;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;color:rgba(249,168,37,0.1);line-height:1;margin-bottom:10px;">04</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;">Pay Per Lead Delivered</div>
-        <div style="font-size:13px;color:var(--grey);line-height:1.65;">When a qualified homeowner lands in your WhatsApp you pay ₦4,000 (leads only) or ₦6,000 (leads + follow-up). Zero leads delivered means zero charge from Tubalcain — your ad spend went to Facebook, the same as if you ran the ads yourself.
+        <div style="font-size:13px;color:var(--grey);line-height:1.65;">When a verified buyer lands in your WhatsApp you pay ₦5,000. Zero leads delivered means zero charge from Tubalcain — your ad spend went to Facebook, the same as if you ran the ads yourself.
         </div>
         <div style="display:inline-flex;align-items:center;gap:4px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);background:rgba(249,168,37,0.08);border:1px solid rgba(249,168,37,0.18);padding:3px 8px;border-radius:2px;margin-top:10px;">No leads = no Tubalcain charge</div>
         </div>
-        <div style="display:inline-flex;align-items:center;gap:4px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);background:rgba(249,168,37,0.08);border:1px solid rgba(249,168,37,0.18);padding:3px 8px;border-radius:2px;margin-top:10px;">₦4,000 on delivery only</div>
+        <div style="display:inline-flex;align-items:center;gap:4px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);background:rgba(249,168,37,0.08);border:1px solid rgba(249,168,37,0.18);padding:3px 8px;border-radius:2px;margin-top:10px;">₦5,000 on delivery only</div>
       </div>
 
     </div>
@@ -3248,7 +3326,7 @@ h1,h2,h3,.section-title,.hero h1 {
         </div>
         <div class="case-result">
           <div class="case-metric"><div class="case-num">17</div><div class="case-num-label">leads<br>6 days</div></div>
-          <div class="case-quote"><span class="case-quote-mark">&ldquo;</span><p>Exceeded the trial target. All 17 leads were pre-screened to his exact qualifications before a single message was sent.</p></div>
+          <div class="case-quote"><span class="case-quote-mark">&ldquo;</span><p>Exceeded the trial target. All 17 leads were verified through our 8-gate system before a single message was sent.</p></div>
         </div>
         <div class="case-verified"><span class="verified-dot"></span>Verified — Proof of Concept trial delivery data</div>
       </div>
@@ -3422,7 +3500,7 @@ h1,h2,h3,.section-title,.hero h1 {
         <div class="bonus-wide-inner">
           <div class="bonus-problem" style="margin:0;">
             <div class="bp-label">Problem It Eliminates</div>
-            <div class="bp-text">A qualified homeowner fills the form — then waits. No one calls. They move on. You lost a ₦2M deal because of a 2-hour response delay. The fastest installer wins 80% of Nigerian solar deals.</div>
+            <div class="bp-text">A verified buyer fills the form — then waits. No one calls. They move on. You lost a ₦2M deal because of a 2-hour response delay. The fastest installer wins 80% of Nigerian solar deals.</div>
           </div>
           <div class="bonus-solution">
             <div class="bs-item"><div class="bs-check" style="background:rgba(0,151,167,0.1);border:1px solid rgba(0,151,167,0.2);color:#80DEEA;">✓</div><span>The moment a lead qualifies, an automated SMS fires to the homeowner — setting the stage before your call even happens</span></div>
@@ -3444,7 +3522,7 @@ h1,h2,h3,.section-title,.hero h1 {
 <section id="offer" style="padding:88px 0;background:var(--ink-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div class="container">
     <div class="label">The Simplest Deal in Nigerian Solar Lead Generation</div>
-    <h2 class="section-title">Your Ad Budget to Facebook.<br><em>₦4,000</em> Per Lead <br></h2>
+    <h2 class="section-title">Your Ad Budget to Facebook.<br><em>₦5,000</em> Per Lead <br></h2>
     <p class="section-sub" style="max-width:680px;">No setup fee. No retainer. No management charge. You keep paying Facebook what you are already paying and for every lead that comes out meeting all 8 criteria, you pay us ₦4,000. That ₦4,000 includes the lead qualification, Real-time delivery(3 months  SMS follow-up not Included). If a lead does not meet the 8-gate standard, it never reaches your WhatsApp and you are not charged.</p>
 
     <div style="background:var(--card);border:1px solid rgba(21,101,192,0.2);border-top:3px solid var(--orange);border-radius:6px;overflow:hidden;margin-top:48px;">
@@ -3458,13 +3536,13 @@ h1,h2,h3,.section-title,.hero h1 {
         </div>
         <div style="background:rgba(21,101,192,0.06);border:1px solid rgba(21,101,192,0.18);border-radius:6px;padding:24px;text-align:center;min-width:0;flex-shrink:1;width:100%;">
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Your Cost Per Lead</div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;color:var(--orange);line-height:1;margin-bottom:4px;">₦4,000</div>
-          <div style="font-size:11px;color:var(--grey-2);font-weight:600;line-height:1.5;">per qualified Lead</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;color:var(--orange);line-height:1;margin-bottom:4px;">₦5,000</div>
+          <div style="font-size:11px;color:var(--grey-2);font-weight:600;line-height:1.5;">per Verified Buyer</div>
           <div style="margin-top:14px;padding:10px 12px;background:var(--ink-3);border:1px solid var(--border);border-radius:4px;font-size:11px;color:var(--grey);line-height:1.7;text-align:left;">
             50 leads = <span style="color:var(--green);">₦200,000</span><br>
             100 leads = <span style="color:var(--green);">₦400,000</span><br>
             200 leads = <span style="color:var(--amber);">₦800,000</span><br>
-            <span style="font-size:10px;color:var(--muted);border-top:1px solid var(--border);display:block;margin-top:6px;padding-top:6px;">breakdown: ₦4,000 qualification + Real-time lead Delivery<br>+ your ad spend (funded through Tubalcain)</span>
+            <span style="font-size:10px;color:var(--muted);border-top:1px solid var(--border);display:block;margin-top:6px;padding-top:6px;">breakdown: ₦5,000 qualification + Real-time delivery<br>+ your ad spend (funded through Tubalcain)</span>
           </div>
         </div>
       </div>
@@ -3517,7 +3595,7 @@ h1,h2,h3,.section-title,.hero h1 {
             <div style="display:flex;gap:12px;align-items:flex-start;position:relative;z-index:1;">
               <div style="width:23px;height:23px;border-radius:50%;border:1px solid var(--green);background:rgba(0,151,167,0.1);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--green);flex-shrink:0;">₦</div>
               <div style="flex:1;padding-top:2px;">
-                <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:2px;">You pay ₦4,000 per delivered lead</div>
+                <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:2px;">You pay ₦5,000 per verified buyer delivered</div>
                 <div style="font-size:11px;color:var(--grey);line-height:1.55;">No lead, no charge.</div>
               </div>
             </div>
@@ -3557,7 +3635,7 @@ h1,h2,h3,.section-title,.hero h1 {
 
       <!-- CTA -->
       <div class="mob-cta-bar" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:24px 36px;border-top:1px solid var(--border);">
-        <div style="font-size:14px;color:var(--grey-2);line-height:1.7;flex:1;"><strong style="color:#888;">You pay ₦4,000 only when a pre-qualified homeowner arrives in your WhatsApp.</strong>No extra charge. Fund the campaign, approve the creative, start receiving leads within 48 hours.</div>
+        <div style="font-size:14px;color:var(--grey-2);line-height:1.7;flex:1;"><strong style="color:#888;">You pay ₦5,000 only when a verified buyer arrives in your WhatsApp.</strong>No extra charge. Fund the campaign, approve the creative, start receiving leads within 48 hours.</div>
         <a href="#" class="btn btn-primary" onclick="openQualifier('pricing');return false;">
           Apply for My City <span class="btn-arrow">→</span>
         </a>
@@ -3577,7 +3655,7 @@ h1,h2,h3,.section-title,.hero h1 {
   <div class="container">
     <div class="label">The Simplest Deal in Nigerian Solar Lead Generation</div>
     <h2 class="section-title">One Offer. One Price.<br><em>Pay Only When It Works.</em></h2>
-    <p class="section-sub" style="max-width:680px;">No packages to choose between. No bundles to decode. You get pre-qualified solar homeowners delivered to your WhatsApp and you pay ₦4,000 per lead only after each one arrives. That is it.</p>
+    <p class="section-sub" style="max-width:680px;">No packages to choose between. No bundles to decode. You get verified solar buyers delivered to your WhatsApp and you pay ₦5,000 per verified buyer only after each one arrives. That is it.</p>
 
     <!-- Single offer card — Leads Only -->
     <div style="max-width:560px;margin:48px auto 0;">
@@ -3586,19 +3664,19 @@ h1,h2,h3,.section-title,.hero h1 {
 
         <!-- Badge -->
         <div style="background:linear-gradient(135deg,var(--orange),#1976D2);text-align:center;padding:8px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff;">
-          ₦0 Upfront · ₦0 Retainer · Pay Per Qualified Lead
+          ₦0 Upfront · ₦0 Retainer · Pay Per Verified Buyer
         </div>
 
         <div style="padding:36px 32px 28px;border-bottom:1px solid var(--border);">
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--orange);margin-bottom:12px;">Performance-Based Lead Delivery</div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;text-transform:uppercase;letter-spacing:0.02em;color:var(--white);line-height:1.05;margin-bottom:10px;">8-Gate Qualified<br>Solar Homeowners</div>
-          <div style="font-size:15px;color:var(--grey-2);line-height:1.7;margin-bottom:28px;">Pre-qualified homeowners delivered directly to your WhatsApp. Every lead has confirmed budget, ownership, timeline, home safety, and is expecting your call. You pay only after delivery.</div>
+          <div style="font-size:15px;color:var(--grey-2);line-height:1.7;margin-bottom:28px;">Pre-verified buyers delivered directly to your WhatsApp. Every lead has confirmed budget, ownership, timeline, home safety, and is expecting your call. You pay only after delivery.</div>
 
           <!-- Price -->
           <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:6px;">
-            <span style="font-family:'Barlow Condensed',sans-serif;font-size:64px;font-weight:900;color:var(--orange);line-height:1;">₦4,000</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:64px;font-weight:900;color:var(--orange);line-height:1;">₦5,000</span>
             <div>
-              <div style="font-size:14px;font-weight:700;color:var(--white);">per qualified lead</div>
+              <div style="font-size:14px;font-weight:700;color:var(--white);">per verified buyer</div>
               <div style="font-size:12px;color:var(--grey-2);">charged only after delivery</div>
             </div>
           </div>
@@ -3640,7 +3718,7 @@ h1,h2,h3,.section-title,.hero h1 {
           <a href="#" onclick="openQualifier('leads-only');return false;" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:18px 20px;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#fff;text-decoration:none;background:var(--orange);cursor:pointer;border:none;box-shadow:0 8px 28px rgba(21,101,192,0.35);transition:all 0.22s;">
             Check If My City Is Open →
           </a>
-          <p style="text-align:center;font-size:12px;color:var(--grey);margin-top:12px;line-height:1.6;">No upfront fee. No retainer. Pay ₦4,000 only when a qualified homeowner arrives in your WhatsApp.</p>
+          <p style="text-align:center;font-size:12px;color:var(--grey);margin-top:12px;line-height:1.6;">No upfront fee. No retainer. Pay ₦5,000 only when a verified buyer arrives in your WhatsApp.</p>
         </div>
 
       </div>
@@ -3667,41 +3745,96 @@ h1,h2,h3,.section-title,.hero h1 {
     <h2 class="section-title">Questions Installers<br><em>Always Ask First.</em></h2>
     <p class="section-sub" style="max-width:600px;margin-bottom:52px;">Before you apply, here are the answers to the questions every installer asks before their first batch.</p>
 
-    <div class="mob-grid-2" style="max-width:960px">
+    <div style="max-width:760px;display:flex;flex-direction:column;gap:0;">
 
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:24px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--white);margin-bottom:10px;">What if a lead does not pick up their phone?</div>
-        <p style="font-size:13px;color:var(--grey);line-height:1.75;">Every lead gives their WhatsApp number voluntarily and is told an installer will contact them. If you call within 1 hour of delivery, contact rates are above 70%. If a lead is completely unreachable after 3 attempts in 24 hours, message us and we review it. Leads that fail our 8-gate check are not delivered and not charged.</p>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What if a verified buyer does not pick up their phone?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p>Every verified buyer gives their WhatsApp number voluntarily and is told an installer will contact them. If you call within 1 hour of delivery, contact rates are above 70%. If a verified buyer is completely unreachable after 3 attempts in 24 hours, message us and we review it. Buyers that fail our 8-gate check are not delivered and not charged.</p>
+        </div>
       </div>
 
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:24px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--white);margin-bottom:10px;">How does billing work exactly?</div>
-        <p style="font-size:13px;color:var(--grey);line-height:1.75;">Your ads budget goes straight to faceebook. Each time a qualified lead is delivered to your WhatsApp, &#x20A6;4,000 is charged. We invoice you by batch of 10 or 5 based on your selection. You can set a monthly lead cap so your spend stays predictable. No lead, no charge — ever.</p>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          How does billing work exactly?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p>Your ₦150,000 campaign deposit goes directly to Facebook through our managed ad account. Each time a verified buyer is delivered to your WhatsApp, ₦5,000 is charged. You can set a monthly lead cap so your spend stays predictable. No verified buyer delivered — no charge ever.</p>
+        </div>
       </div>
 
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:24px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--white);margin-bottom:10px;">Can I pause or stop at any time?</div>
-        <p style="font-size:13px;color:var(--grey);line-height:1.75;">Yes. There is no lock-in, no minimum commitment, and no cancellation fee. If your team is full or you are on a job, message us and we pause your campaign that day. You only pay for leads that have already been delivered.</p>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          Can I pause or stop at any time?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p>Yes. There is no lock-in, no minimum commitment, and no cancellation fee. If your team is full or you are on a job, message us and we pause your campaign that day. You only pay for verified buyers that have already been delivered.</p>
+        </div>
       </div>
 
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:24px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--white);margin-bottom:10px;">What cities do you currently cover?</div>
-        <p style="font-size:13px;color:var(--grey);line-height:1.75;">We currently operate in Lagos, Abuja, Port Harcourt, Ibadan, Benin City, Nasarawa, Makurdi, Imo State and other states in Nigeria. Each city has one exclusive slot. Apply and we confirm if your city is still available. New cities open regularly as demand grows.</p>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What cities do you currently cover?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p>We currently operate in Lagos, Abuja, Port Harcourt, Ibadan, Benin City, Nasarawa, Makurdi, Imo State and other states in Nigeria. Each city has one exclusive slot. Apply and we confirm if your city is still available. New cities open regularly as demand grows.</p>
+        </div>
       </div>
 
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:24px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--white);margin-bottom:10px;">What is the ₦1.5M+ budget requirement about?</div>
-        <p style="font-size:13px;color:var(--grey);line-height:1.75;">Every homeowner we deliver has confirmed they have the financial capacity to fund a minimum &#x20A6;1.5M solar installation. This is verified through their stated monthly power spend (&#x20A6;30,000+ per month on PHCN and generator combined). We do not deliver anyone who cannot afford your system.</p>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What is the ₦1.5M+ budget requirement about?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p>Every verified buyer we deliver has confirmed they have the financial capacity to fund a minimum ₦1.5M solar installation. This is verified through their stated monthly power spend (₦30,000+ per month on PHCN and generator combined). We do not deliver anyone who cannot afford your system.</p>
+        </div>
       </div>
 
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:24px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--white);margin-bottom:10px;">How long before I start receiving leads?</div>
-        <p style="font-size:13px;color:var(--grey);line-height:1.75;">Once you are confirmed and onboarded, your campaign goes live within 48 hours. Most installers receive their first lead within 3–5 days of campaign launch. After that, leads come in based on Facebook ad performance — typically 2–8 per week depending on your city size.</p>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          How long before I start receiving verified buyers?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p>Once you are confirmed and onboarded, your campaign goes live within 48 hours. Most installers receive their first verified buyer within 3–5 days of campaign launch. After that, verified buyers come in based on Facebook ad performance — typically 2–8 per week depending on your city size.</p>
+        </div>
       </div>
 
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:24px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--white);margin-bottom:10px;">What if the campaign runs for a full week and produces zero qualified leads?</div>
-        <p style="font-size:13px;color:var(--grey);line-height:1.75;">We only charge ₦4,000 per lead delivered, and zero leads delivered means zero charge. Your ad spend went to Facebook for traffic impressions and clicks, that money leaves your hands the moment it hits the ad account, the same as if you ran the ads yourself. What we do when lead volume is low is diagnose the creative and audience targeting, make adjustments, and keep optimising. We have a direct financial incentive to get leads flowing because we only earn when you receive them. We cannot run a charity campaign that produces nothing — it costs us the same management time either way.</p>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What if the campaign runs for a week and produces zero verified buyers?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p>We only charge ₦5,000 per verified buyer delivered — zero buyers delivered means zero charge. Your ₦150,000 went to Facebook for traffic; that money functions as your ad spend, the same as if you ran the ads yourself. When volume is low we diagnose creative and targeting, adjust, and keep optimising. We have a direct financial incentive to deliver — we only earn when you receive buyers. And if we don't deliver 30 verified buyers in your first 30 days, the next 30 days run at zero extra deposit from you.</p>
+        </div>
+      </div>
+
+      <div class="faq-item faq-item--highlight">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          Does the ₦150,000 deposit go to Tubalcain?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p>No. Your ₦150,000 goes directly to Facebook through the Tubalcain managed ad account. It is your ad spend — we manage the campaign, you fund the traffic. You receive a transfer receipt and can request a spend report at any time. Tubalcain only earns the ₦5,000 per verified buyer fee, charged only after delivery.</p>
+        </div>
+      </div>
+
+      <div class="faq-item faq-item--highlight">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What happens when the ₦150,000 runs out?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p>When your ad balance drops to approximately ₦30,000 remaining, we will contact you with a performance update — verified buyers delivered, cost per buyer, and ad performance. At that point you decide whether to top up and continue or pause. No automatic renewals. No surprise charges. Your city slot remains locked as long as your campaign is active.</p>
+        </div>
       </div>
 
     </div>
@@ -3734,14 +3867,42 @@ h1,h2,h3,.section-title,.hero h1 {
       </a>
     </div>
 
-    <div class="close-scarcity">
-      <span class="sc-dot"></span>
-      4 installer slots currently open across Nigeria
+    <div class="close-scarcity" style="flex-direction:column;align-items:center;gap:10px;">
+      <div style="font-size:12px;color:var(--grey);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;">City Slot Status</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Lagos — Open</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Abuja — Open</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(239,83,80,0.08);border:1px solid rgba(239,83,80,0.2);color:var(--red);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;">Port Harcourt — Taken</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Benin City — Open</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);color:var(--green);font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;padding:4px 12px;border-radius:2px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite;display:inline-block;"></span>Warri — Open</span>
+      </div>
     </div>
   </div>
 </section>
 
 
+
+<!-- Mobile sticky CTA -->
+<div class="mob-sticky-cta" id="mobStickyCta">
+  <a href="#" onclick="openQualifier('mob-sticky');return false;">
+    Check If My City Is Open →
+  </a>
+</div>
+
+<!-- Exit intent popup -->
+<div class="exit-overlay" id="exitOverlay">
+  <div class="exit-box">
+    <button class="exit-close" onclick="closeExit()" aria-label="Close">✕</button>
+    <div style="font-size:36px;margin-bottom:12px;">⚡</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Before You Go</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:0.02em;color:var(--white);line-height:1.05;margin-bottom:12px;">Your City Slot<br>Might Still Be Open.</div>
+    <p style="font-size:14px;color:var(--grey);line-height:1.7;margin-bottom:24px;">Takes 30 seconds to check. ₦150,000 goes directly to Facebook — you pay ₦5,000 only after each verified buyer is delivered to your WhatsApp.</p>
+    <a href="#" onclick="closeExit();openQualifier('exit-intent');return false;" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 20px;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#fff;text-decoration:none;background:var(--orange);cursor:pointer;margin-bottom:10px;">
+      Check My City — 30 Seconds →
+    </a>
+    <button onclick="closeExit()" style="width:100%;background:transparent;border:1px solid var(--border-2);color:var(--grey);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:10px;border-radius:4px;cursor:pointer;">No thanks, I'll pass</button>
+  </div>
+</div>
 
 <footer>
   <div class="container">
@@ -3882,7 +4043,7 @@ h1,h2,h3,.section-title,.hero h1 {
       <!-- Q4 — Readiness -->
       <div class="qblock" id="qq4">
         <div class="qlabel">Question 4 of 4 — Readiness</div>
-        <div class="qtitle">If 30 pre-qualified homeowners were delivered to your WhatsApp this week — are you financially capable of handling the bill (₦120,000)?</div>
+        <div class="qtitle">If 30 verified buyers were delivered to your WhatsApp this week — are you financially capable of handling the bill (₦150,000)?</div>
         <div class="qsub">Leads only convert when the installer is operationally ready. Be honest — no wrong answer here.</div>
         <div class="qoptions">
             <button class="qoption" data-q="4" data-val="ready-now" data-disqualify="false" onclick="selectQ(this)">
@@ -3923,7 +4084,11 @@ h1,h2,h3,.section-title,.hero h1 {
           </div>
           <div class="qfield">
             <label>WhatsApp Number</label>
-            <input type="tel" id="qphone" placeholder="e.g. 08012345678" autocomplete="tel">
+            <div class="qphone-wrap">
+              <input type="tel" id="qphone" placeholder="e.g. 08012345678" autocomplete="tel" oninput="validatePhoneLive(this)">
+              <span class="qphone-status" id="qphoneStatus"></span>
+            </div>
+            <div class="qphone-hint" id="qphoneHint">Nigerian number: 08012345678 or +2348012345678</div>
           </div>
           <div class="qfield">
             <label>City / State</label>
@@ -3939,17 +4104,123 @@ h1,h2,h3,.section-title,.hero h1 {
 
     </div><!-- /qbody -->
 
-    <!-- Result: Qualified → WhatsApp -->
-    <div class="qresult" id="qQualified">
-      <div class="qresult-icon">✅</div>
-      <div class="qresult-title">You Qualify.</div>
-      <div class="qresult-sub">
-        <strong>Your city slot is being checked.</strong><br>
-        Message Tubalcain directly on WhatsApp — we will confirm availability and get your campaign live within 48 hours.
+    <!-- Result: Qualified → Checkout summary → WhatsApp -->
+    <div class="qresult" id="qQualified" style="padding:0;text-align:left;">
+
+      <!-- Celebratory header -->
+      <div class="qcheckout-header">
+        <div style="font-size:44px;margin-bottom:10px;">🎉</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Your City Slot Is Available</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;text-transform:uppercase;letter-spacing:0.02em;color:var(--white);line-height:1.05;margin-bottom:10px;">Here Is Everything You Get When You Partner With Us</div>
+        <p style="font-size:13px;color:var(--grey);line-height:1.6;max-width:440px;margin:0 auto;">Your details are in. Before you message us, see exactly what you are getting — and why our partners close 38% of the verified buyers we send them.</p>
       </div>
-      <a id="qWhatsAppLink" href="#" class="qresult-btn primary" target="_blank" rel="noopener">
-        Message Tubalcain on WhatsApp →
-      </a>
+
+      <!-- Core offer -->
+      <div class="qcheckout-section">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">What Is Included</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#8BAAD0;line-height:1.5;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span><span><strong style="color:var(--white);">8-Gate Verified Buyers</strong> — property owner, ₦1.5M+ budget, 90-day timeline, home safety, all confirmed</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#8BAAD0;line-height:1.5;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span><span><strong style="color:var(--white);">₦5,000 per buyer on delivery</strong> — zero charge if no buyer is delivered. Zero retainer. Zero setup fee.</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#8BAAD0;line-height:1.5;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span><span><strong style="color:var(--white);">Exclusive city territory</strong> — no other installer in your city while your campaign is active</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#8BAAD0;line-height:1.5;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span><span><strong style="color:var(--white);">Campaign live within 48 hours</strong> — full Facebook management, creative, targeting, daily optimisation</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#8BAAD0;line-height:1.5;"><span style="color:var(--amber);font-weight:700;flex-shrink:0;">✓</span><span><strong style="color:var(--white);">30-Day Guarantee</strong> — if we don't deliver 30 verified buyers in your first 30 days, the next 30 days run at zero extra deposit</span></div>
+        </div>
+      </div>
+
+      <!-- Bonuses -->
+      <div class="qcheckout-section">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">6 Free Bonuses Included — Total Value ₦165,000+</div>
+
+        <div class="qcheckout-bonus">
+          <div style="font-size:22px;flex-shrink:0;">📋</div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;">
+              <div style="font-size:13px;font-weight:700;color:var(--white);">Authority Close Kit Vol. 1 &amp; 2</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);background:rgba(249,168,37,0.08);border:1px solid rgba(249,168,37,0.18);padding:2px 7px;border-radius:2px;white-space:nowrap;">₦45,000</div>
+            </div>
+            <div style="font-size:12px;color:var(--grey);line-height:1.55;">Word-for-word WhatsApp scripts and a complete 7-day follow-up sequence — so the first call you make to a verified buyer is already set up to close.</div>
+          </div>
+        </div>
+
+        <div class="qcheckout-bonus">
+          <div style="font-size:22px;flex-shrink:0;">📊</div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;">
+              <div style="font-size:13px;font-weight:700;color:var(--white);">Solar ROI Calculator</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);background:rgba(249,168,37,0.08);border:1px solid rgba(249,168,37,0.18);padding:2px 7px;border-radius:2px;white-space:nowrap;">₦25,000</div>
+            </div>
+            <div style="font-size:12px;color:var(--grey);line-height:1.55;">Enter the homeowner's monthly NEPA + fuel spend and show them their exact 20-year savings instantly. A ₦4M system becomes an easy yes when they see the numbers.</div>
+          </div>
+        </div>
+
+        <div class="qcheckout-bonus">
+          <div style="font-size:22px;flex-shrink:0;">⚡</div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;">
+              <div style="font-size:13px;font-weight:700;color:var(--white);">Speed Advantage Setup</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);background:rgba(249,168,37,0.08);border:1px solid rgba(249,168,37,0.18);padding:2px 7px;border-radius:2px;white-space:nowrap;">₦30,000</div>
+            </div>
+            <div style="font-size:12px;color:var(--grey);line-height:1.55;">SMS fires to your phone in under 1 second the moment a buyer qualifies — name, city, budget, phone, all ready to call. The fastest installer wins 80% of Nigerian solar deals.</div>
+          </div>
+        </div>
+
+        <div class="qcheckout-bonus">
+          <div style="font-size:22px;flex-shrink:0;">🔒</div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;">
+              <div style="font-size:13px;font-weight:700;color:var(--white);">Exclusive Territory Lock</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.18);padding:2px 7px;border-radius:2px;white-space:nowrap;">Priceless</div>
+            </div>
+            <div style="font-size:12px;color:var(--grey);line-height:1.55;">While you are active, we take on zero other installers in your city. Every verified buyer in your territory comes to you alone. First installer to join locks it.</div>
+          </div>
+        </div>
+
+        <div class="qcheckout-bonus">
+          <div style="font-size:22px;flex-shrink:0;">🔧</div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;">
+              <div style="font-size:13px;font-weight:700;color:var(--white);">ABC Solar Load Calculator</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);background:rgba(249,168,37,0.08);border:1px solid rgba(249,168,37,0.18);padding:2px 7px;border-radius:2px;white-space:nowrap;">₦20,000</div>
+            </div>
+            <div style="font-size:12px;color:var(--grey);line-height:1.55;">Interactive load calculator you use on site visits — enter appliances, get the exact system size and cost in seconds. Works offline. Makes you look like a certified engineer before the quotation.</div>
+          </div>
+        </div>
+
+        <div class="qcheckout-bonus">
+          <div style="font-size:22px;flex-shrink:0;">📲</div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;">
+              <div style="font-size:13px;font-weight:700;color:var(--white);">30-Day Re-Engagement SMS</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.18);padding:2px 7px;border-radius:2px;white-space:nowrap;">Included</div>
+            </div>
+            <div style="font-size:12px;color:var(--grey);line-height:1.55;">The moment a buyer is delivered, a 30-day automated SMS sequence activates — keeping you on their mind from first contact to signature. Most deals close weeks after first contact. This is what makes that happen.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Total + stat -->
+      <div class="qcheckout-section" style="background:rgba(21,101,192,0.04);">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="font-size:11px;color:var(--muted);font-weight:600;margin-bottom:4px;">Total Bonus Value</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;color:var(--amber);line-height:1;">₦165,000<span style="font-size:18px;">+</span></div>
+            <div style="font-size:11px;color:var(--grey);">Yours free with every partnership</div>
+          </div>
+          <div style="text-align:center;background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);border-radius:4px;padding:12px 20px;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--green);line-height:1;">38%</div>
+            <div style="font-size:10px;color:var(--grey);font-weight:600;line-height:1.4;">Partner Close Rate<br>vs 10% Industry Avg</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sticky CTA footer -->
+      <div class="qcheckout-footer">
+        <a id="qWhatsAppLink" href="#" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 20px;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#fff;text-decoration:none;background:var(--orange);box-shadow:0 6px 20px rgba(21,101,192,0.35);margin-bottom:10px;">
+          Message Tubalcain on WhatsApp →
+        </a>
+        <div style="font-size:11px;color:var(--grey);line-height:1.6;">We confirm your city slot and get your campaign live within 48 hours. ₦5,000 charged only when a verified buyer arrives.</div>
+      </div>
+
     </div>
 
     <!-- Result: Not Qualified → Website -->
@@ -4086,6 +4357,25 @@ function showDisqualified() {
   }
 }
 
+function validatePhoneLive(input) {
+  const val = input.value.replace(/[\s\-().]/g, '');
+  const status = document.getElementById('qphoneStatus');
+  const hint   = document.getElementById('qphoneHint');
+  const ngPattern = /^(\+?234|0)(7[0-9]|8[0-9]|9[0-9])[0-9]{8}$/;
+  if (val.length === 0) {
+    status.style.display = 'none'; input.style.borderColor = ''; hint.style.color = 'var(--grey)';
+    hint.textContent = 'Nigerian number: 08012345678 or +2348012345678'; return;
+  }
+  if (ngPattern.test(val)) {
+    status.textContent = '✓'; status.style.display = 'block'; status.style.color = 'var(--green)';
+    input.style.borderColor = 'var(--green)'; hint.style.color = 'var(--green)'; hint.textContent = 'Valid Nigerian number ✓';
+  } else {
+    status.textContent = '✕'; status.style.display = 'block'; status.style.color = 'var(--red)';
+    input.style.borderColor = 'var(--red)'; hint.style.color = 'var(--red)';
+    hint.textContent = val.length < 7 ? 'Keep typing…' : 'Must start with 07, 08, 09, +234 — 11 digits';
+  }
+}
+
 async function submitQualifier() {
   const first = document.getElementById('qfirst').value.trim();
   const last  = document.getElementById('qlast').value.trim();
@@ -4096,6 +4386,15 @@ async function submitQualifier() {
   if (!first || !last || !phone || !city) {
     errEl.textContent = 'Please fill in all fields to continue.';
     errEl.style.display = 'block';
+    return;
+  }
+
+  const phoneClean = phone.replace(/[\s\-().]/g, '');
+  const ngPattern = /^(\+?234|0)(7[0-9]|8[0-9]|9[0-9])[0-9]{8}$/;
+  if (!ngPattern.test(phoneClean)) {
+    errEl.textContent = 'Enter a valid Nigerian WhatsApp number (e.g. 08012345678 or +2348012345678).';
+    errEl.style.display = 'block';
+    document.getElementById('qphone').focus();
     return;
   }
 
@@ -4155,7 +4454,7 @@ async function submitQualifier() {
     pipeline:        'I want the Pipeline Protocol monthly package',
     elite:           'I want to discuss the Elite Multi-City Programme',
     nurture:         'I want to add the 3 months Lead Nurture System to my package',
-    'leads-only':    'I want the Leads Only option at ₦4,000 per lead',
+    'leads-only':    'I want the Leads Only option at ₦5,000 per verified buyer',
 
     pricing:         'I want to apply and check if my city is still open',
     hero:            'I want to check if my city is still open',
@@ -4214,6 +4513,30 @@ function loadYT(el){
   iframe.allowFullscreen = true;
   iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
   el.parentNode.replaceChild(iframe, el);
+}
+
+/* FAQ accordion */
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', !isOpen);
+  answer.classList.toggle('open', !isOpen);
+}
+
+/* Exit intent */
+let exitShown = false;
+let exitDismissed = false;
+document.addEventListener('mouseleave', function(e) {
+  if (e.clientY <= 0 && !exitShown && !exitDismissed) {
+    const overlay = document.getElementById('qOverlay');
+    if (overlay && overlay.classList.contains('open')) return;
+    exitShown = true;
+    document.getElementById('exitOverlay').classList.add('open');
+  }
+});
+function closeExit() {
+  document.getElementById('exitOverlay').classList.remove('open');
+  exitDismissed = true;
 }
 
 /* Track WhatsApp clicks */
