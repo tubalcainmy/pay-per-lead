@@ -2660,6 +2660,10 @@ h1,h2,h3,.section-title,.hero h1 {
 .qphone-wrap input { padding-right: 40px; }
 .qphone-status { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 16px; font-weight: 700; display: none; }
 .qphone-hint { font-size: 11px; color: var(--grey); margin-top: 4px; }
+.qfield-wrap { position: relative; }
+.qfield-wrap input { padding-right: 34px; }
+.qfield-status { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 15px; font-weight: 700; display: none; }
+.qfield-hint { font-size: 11px; color: var(--grey); margin-top: 4px; min-height: 14px; }
 
 </style>
 </head>
@@ -4075,11 +4079,19 @@ h1,h2,h3,.section-title,.hero h1 {
           <div class="qfield-row">
             <div class="qfield">
               <label>First Name</label>
-              <input type="text" id="qfirst" placeholder="e.g. Chukwuemeka" autocomplete="given-name">
+              <div class="qfield-wrap">
+                <input type="text" id="qfirst" placeholder="e.g. Chukwuemeka" autocomplete="given-name" oninput="validateNameLive(this,'qfirstHint')" onblur="validateNameLive(this,'qfirstHint')">
+                <span class="qfield-status" id="qfirstStatus"></span>
+              </div>
+              <div class="qfield-hint" id="qfirstHint"></div>
             </div>
             <div class="qfield">
               <label>Last Name</label>
-              <input type="text" id="qlast" placeholder="e.g. Okafor" autocomplete="family-name">
+              <div class="qfield-wrap">
+                <input type="text" id="qlast" placeholder="e.g. Okafor" autocomplete="family-name" oninput="validateNameLive(this,'qlastHint')" onblur="validateNameLive(this,'qlastHint')">
+                <span class="qfield-status" id="qlastStatus"></span>
+              </div>
+              <div class="qfield-hint" id="qlastHint"></div>
             </div>
           </div>
           <div class="qfield">
@@ -4092,7 +4104,11 @@ h1,h2,h3,.section-title,.hero h1 {
           </div>
           <div class="qfield">
             <label>City / State</label>
-            <input type="text" id="qcity" placeholder="e.g. Lagos / Abuja / Port Harcourt">
+            <div class="qfield-wrap">
+              <input type="text" id="qcity" placeholder="e.g. Lagos / Abuja / Port Harcourt" oninput="validateCityLive(this)" onblur="validateCityLive(this)">
+              <span class="qfield-status" id="qcityStatus"></span>
+            </div>
+            <div class="qfield-hint" id="qcityHint"></div>
           </div>
         </div>
         <div class="qerr" id="qerr5">Please fill in all fields to continue.</div>
@@ -4357,6 +4373,80 @@ function showDisqualified() {
   }
 }
 
+// Accepts Nigerian + common diaspora name characters: letters, spaces,
+// hyphens, apostrophes. Rejects digits/symbols and requires 2+ letters.
+const NAME_PATTERN = /^[A-Za-zÀ-ÿ]+(?:[\s'-]+[A-Za-zÀ-ÿ]+)*$/;
+// City / State: letters, spaces, commas, hyphens — blocks pure numbers
+// and symbol strings while still allowing "Port Harcourt", "Lagos, Ikeja".
+const CITY_PATTERN = /^[A-Za-zÀ-ÿ]+(?:[\s,'-]+[A-Za-zÀ-ÿ]+)*$/;
+
+function setFieldState(input, statusId, hintId, state, message) {
+  const status = document.getElementById(statusId);
+  const hint   = document.getElementById(hintId);
+  if (state === 'empty') {
+    input.style.borderColor = '';
+    status.style.display = 'none';
+    hint.style.color = 'var(--grey)';
+    hint.textContent = message || '';
+  } else if (state === 'valid') {
+    input.style.borderColor = 'var(--green)';
+    status.textContent = '✓'; status.style.display = 'block'; status.style.color = 'var(--green)';
+    hint.style.color = 'var(--green)';
+    hint.textContent = message || 'Looks good ✓';
+  } else {
+    input.style.borderColor = 'var(--red)';
+    status.textContent = '✕'; status.style.display = 'block'; status.style.color = 'var(--red)';
+    hint.style.color = 'var(--red)';
+    hint.textContent = message;
+  }
+}
+
+function validateNameLive(input, hintId) {
+  const statusId = input.id + 'Status';
+  const val = input.value.trim();
+  const label = input.id === 'qfirst' ? 'First name' : 'Last name';
+  if (val.length === 0) {
+    setFieldState(input, statusId, hintId, 'empty', '');
+    return false;
+  }
+  if (val.length < 2) {
+    setFieldState(input, statusId, hintId, 'invalid', label + ' is too short.');
+    return false;
+  }
+  if (/\d/.test(val)) {
+    setFieldState(input, statusId, hintId, 'invalid', label + ' cannot contain numbers.');
+    return false;
+  }
+  if (!NAME_PATTERN.test(val)) {
+    setFieldState(input, statusId, hintId, 'invalid', label + ' — letters only, please.');
+    return false;
+  }
+  setFieldState(input, statusId, hintId, 'valid', '');
+  return true;
+}
+
+function validateCityLive(input) {
+  const val = input.value.trim();
+  if (val.length === 0) {
+    setFieldState(input, 'qcityStatus', 'qcityHint', 'empty', '');
+    return false;
+  }
+  if (val.length < 2) {
+    setFieldState(input, 'qcityStatus', 'qcityHint', 'invalid', 'City / State is too short.');
+    return false;
+  }
+  if (/\d/.test(val)) {
+    setFieldState(input, 'qcityStatus', 'qcityHint', 'invalid', 'City / State cannot contain numbers.');
+    return false;
+  }
+  if (!CITY_PATTERN.test(val)) {
+    setFieldState(input, 'qcityStatus', 'qcityHint', 'invalid', 'Enter a real city or state name.');
+    return false;
+  }
+  setFieldState(input, 'qcityStatus', 'qcityHint', 'valid', '');
+  return true;
+}
+
 function validatePhoneLive(input) {
   const val = input.value.replace(/[\s\-().]/g, '');
   const status = document.getElementById('qphoneStatus');
@@ -4377,15 +4467,36 @@ function validatePhoneLive(input) {
 }
 
 async function submitQualifier() {
-  const first = document.getElementById('qfirst').value.trim();
-  const last  = document.getElementById('qlast').value.trim();
-  const phone = document.getElementById('qphone').value.trim();
-  const city  = document.getElementById('qcity').value.trim();
+  const firstEl = document.getElementById('qfirst');
+  const lastEl  = document.getElementById('qlast');
+  const phoneEl = document.getElementById('qphone');
+  const cityEl  = document.getElementById('qcity');
+  const first = firstEl.value.trim();
+  const last  = lastEl.value.trim();
+  const phone = phoneEl.value.trim();
+  const city  = cityEl.value.trim();
   const errEl = document.getElementById('qerr5');
 
+  // ── 1. Nothing left empty ──
   if (!first || !last || !phone || !city) {
     errEl.textContent = 'Please fill in all fields to continue.';
     errEl.style.display = 'block';
+    (!first ? firstEl : !last ? lastEl : !phone ? phoneEl : cityEl).focus();
+    return;
+  }
+
+  // ── 2. Every field re-validated against its own rules — a field can be
+  //       non-empty and still be wrong (numbers in a name, a fake city, etc.) ──
+  const checks = [
+    { el: firstEl, ok: validateNameLive(firstEl, 'qfirstHint'),  msg: 'Check your first name — letters only, at least 2 characters.' },
+    { el: lastEl,  ok: validateNameLive(lastEl,  'qlastHint'),   msg: 'Check your last name — letters only, at least 2 characters.' },
+    { el: cityEl,  ok: validateCityLive(cityEl),                 msg: 'Enter a real city or state name (letters only).' },
+  ];
+  const firstBad = checks.find(c => !c.ok);
+  if (firstBad) {
+    errEl.textContent = firstBad.msg;
+    errEl.style.display = 'block';
+    firstBad.el.focus();
     return;
   }
 
@@ -4394,7 +4505,7 @@ async function submitQualifier() {
   if (!ngPattern.test(phoneClean)) {
     errEl.textContent = 'Enter a valid Nigerian WhatsApp number (e.g. 08012345678 or +2348012345678).';
     errEl.style.display = 'block';
-    document.getElementById('qphone').focus();
+    phoneEl.focus();
     return;
   }
 
