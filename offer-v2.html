@@ -2660,6 +2660,9 @@ h1,h2,h3,.section-title,.hero h1 {
 .qphone-wrap input { padding-right: 40px; }
 .qphone-status { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 16px; font-weight: 700; display: none; }
 .qphone-hint { font-size: 11px; color: var(--grey); margin-top: 4px; }
+.qfield input.qfield-invalid { border-color: var(--red) !important; }
+.qfield input.qfield-valid { border-color: var(--green) !important; }
+.qfield-hint { font-size: 11px; color: var(--grey); margin-top: 4px; }
 
 </style>
 </head>
@@ -2694,7 +2697,7 @@ h1,h2,h3,.section-title,.hero h1 {
     <h1>
       Become the Installer<br>
       Everyone in Your City Asks<br>
-      <span class="orange">"How Are You So Busy?"</span>
+      <span class="amb">"How Are You So Busy?"</span>
     </h1>
 
     <!-- New offer positioning — 4 pillars -->
@@ -4075,30 +4078,33 @@ h1,h2,h3,.section-title,.hero h1 {
           <div class="qfield-row">
             <div class="qfield">
               <label>First Name</label>
-              <input type="text" id="qfirst" placeholder="e.g. Chukwuemeka" autocomplete="given-name">
+              <input type="text" id="qfirst" placeholder="e.g. Chukwuemeka" autocomplete="given-name" oninput="validateNameLive(this,'qfirstHint');checkQ5Valid();">
+              <div class="qfield-hint" id="qfirstHint"></div>
             </div>
             <div class="qfield">
               <label>Last Name</label>
-              <input type="text" id="qlast" placeholder="e.g. Okafor" autocomplete="family-name">
+              <input type="text" id="qlast" placeholder="e.g. Okafor" autocomplete="family-name" oninput="validateNameLive(this,'qlastHint');checkQ5Valid();">
+              <div class="qfield-hint" id="qlastHint"></div>
             </div>
           </div>
           <div class="qfield">
             <label>WhatsApp Number</label>
             <div class="qphone-wrap">
-              <input type="tel" id="qphone" placeholder="e.g. 08012345678" autocomplete="tel" oninput="validatePhoneLive(this)">
+              <input type="tel" id="qphone" placeholder="e.g. 08012345678" autocomplete="tel" oninput="validatePhoneLive(this);checkQ5Valid();">
               <span class="qphone-status" id="qphoneStatus"></span>
             </div>
             <div class="qphone-hint" id="qphoneHint">Nigerian number: 08012345678 or +2348012345678</div>
           </div>
           <div class="qfield">
             <label>City / State</label>
-            <input type="text" id="qcity" placeholder="e.g. Lagos / Abuja / Port Harcourt">
+            <input type="text" id="qcity" placeholder="e.g. Lagos / Abuja / Port Harcourt" oninput="validateCityLive(this);checkQ5Valid();">
+            <div class="qfield-hint" id="qcityHint"></div>
           </div>
         </div>
         <div class="qerr" id="qerr5">Please fill in all fields to continue.</div>
         <div class="qnav">
           <button class="qbtn-back" onclick="prevQ(4)">← Back</button>
-          <button class="qbtn-next" id="qSubmitBtn" onclick="submitQualifier()">Check My City <span>→</span></button>
+          <button class="qbtn-next" id="qSubmitBtn" onclick="submitQualifier()" disabled>Check My City <span>→</span></button>
         </div>
       </div>
 
@@ -4271,6 +4277,15 @@ function openQualifier(src) {
   document.getElementById('qlast').value  = '';
   document.getElementById('qphone').value = '';
   document.getElementById('qcity').value  = '';
+  ['qfirst','qlast','qphone','qcity'].forEach(id => {
+    document.getElementById(id).classList.remove('qfield-invalid','qfield-valid');
+  });
+  ['qfirstHint','qlastHint','qcityHint','qphoneHint','qphoneStatus'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.textContent = id === 'qphoneHint' ? 'Nigerian number: 08012345678 or +2348012345678' : ''; el.style.display = id === 'qphoneStatus' ? 'none' : 'block'; }
+  });
+  const submitBtn = document.getElementById('qSubmitBtn');
+  submitBtn.disabled = true;
   updateQProgress(1);
   if (typeof gtag !== 'undefined') gtag('event', 'qualifier_open', { event_category: 'Qualifier', event_label: src });
 }
@@ -4357,46 +4372,126 @@ function showDisqualified() {
   }
 }
 
+// ── Shared field validators (used for live feedback AND the final submit check,
+//    so a value can never pass the button but fail the backend check, or vice versa) ──
+const NG_PHONE_PATTERN = /^(\+?234|0)(7[0-9]|8[0-9]|9[0-9])[0-9]{8}$/;
+const NAME_PATTERN = /^[A-Za-z][A-Za-z'\-]{1,29}(?:\s[A-Za-z][A-Za-z'\-]{0,29}){0,3}$/;
+const CITY_PATTERN = /^[A-Za-z][A-Za-z\s\-\/,.]{1,49}$/;
+
+function validateNameValue(val) {
+  const v = val.trim().replace(/\s+/g, ' ');
+  if (v.length === 0) return { valid: false, message: 'This field is required.' };
+  if (/\d/.test(v)) return { valid: false, message: 'Names cannot contain numbers.' };
+  if (!NAME_PATTERN.test(v)) return { valid: false, message: v.length < 2 ? 'Keep typing…' : 'Enter a valid name (letters only).' };
+  return { valid: true, message: '' };
+}
+
+function validateCityValue(val) {
+  const v = val.trim().replace(/\s+/g, ' ');
+  if (v.length === 0) return { valid: false, message: 'This field is required.' };
+  if (/\d/.test(v)) return { valid: false, message: 'City/State cannot contain numbers.' };
+  if (!CITY_PATTERN.test(v)) return { valid: false, message: v.length < 2 ? 'Keep typing…' : 'Enter a valid city or state name.' };
+  return { valid: true, message: '' };
+}
+
+function validatePhoneValue(val) {
+  const v = val.replace(/[\s\-().]/g, '');
+  if (v.length === 0) return { valid: false, message: 'This field is required.' };
+  if (/^(\d)\1+$/.test(v.replace(/^(\+?234|0)/, ''))) return { valid: false, message: 'Enter a real WhatsApp number.' };
+  if (!NG_PHONE_PATTERN.test(v)) return { valid: false, message: v.length < 7 ? 'Keep typing…' : 'Must start with 07, 08, 09, or +234 — 11 digits total.' };
+  return { valid: true, message: '' };
+}
+
+function applyFieldFeedback(input, hintEl, result, validLabel) {
+  input.classList.remove('qfield-invalid', 'qfield-valid');
+  if (!hintEl) return;
+  if (result.valid) {
+    input.classList.add('qfield-valid');
+    hintEl.style.color = 'var(--green)';
+    hintEl.textContent = validLabel;
+  } else {
+    if (input.value.trim().length > 0) input.classList.add('qfield-invalid');
+    hintEl.style.color = result.message === 'Keep typing…' ? 'var(--grey)' : 'var(--red)';
+    hintEl.textContent = input.value.trim().length === 0 ? '' : result.message;
+  }
+}
+
+function validateNameLive(input, hintId) {
+  applyFieldFeedback(input, document.getElementById(hintId), validateNameValue(input.value), 'Looks good ✓');
+}
+
+function validateCityLive(input) {
+  applyFieldFeedback(input, document.getElementById('qcityHint'), validateCityValue(input.value), 'Looks good ✓');
+}
+
+// checkQ5Valid keeps the submit button locked until all four fields genuinely pass —
+// this is what stops empty or malformed data from ever reaching the webhook.
+function checkQ5Valid() {
+  const first = document.getElementById('qfirst').value;
+  const last  = document.getElementById('qlast').value;
+  const phone = document.getElementById('qphone').value;
+  const city  = document.getElementById('qcity').value;
+  const allValid = validateNameValue(first).valid && validateNameValue(last).valid
+                 && validatePhoneValue(phone).valid && validateCityValue(city).valid;
+  document.getElementById('qSubmitBtn').disabled = !allValid;
+  return allValid;
+}
+
 function validatePhoneLive(input) {
-  const val = input.value.replace(/[\s\-().]/g, '');
   const status = document.getElementById('qphoneStatus');
   const hint   = document.getElementById('qphoneHint');
-  const ngPattern = /^(\+?234|0)(7[0-9]|8[0-9]|9[0-9])[0-9]{8}$/;
-  if (val.length === 0) {
-    status.style.display = 'none'; input.style.borderColor = ''; hint.style.color = 'var(--grey)';
-    hint.textContent = 'Nigerian number: 08012345678 or +2348012345678'; return;
+  const result = validatePhoneValue(input.value);
+  if (input.value.trim().length === 0) {
+    status.style.display = 'none';
+    input.classList.remove('qfield-invalid', 'qfield-valid');
+    hint.style.color = 'var(--grey)';
+    hint.textContent = 'Nigerian number: 08012345678 or +2348012345678';
+    return;
   }
-  if (ngPattern.test(val)) {
-    status.textContent = '✓'; status.style.display = 'block'; status.style.color = 'var(--green)';
-    input.style.borderColor = 'var(--green)'; hint.style.color = 'var(--green)'; hint.textContent = 'Valid Nigerian number ✓';
+  status.style.display = 'block';
+  if (result.valid) {
+    status.textContent = '✓'; status.style.color = 'var(--green)';
+    input.classList.remove('qfield-invalid'); input.classList.add('qfield-valid');
+    hint.style.color = 'var(--green)'; hint.textContent = 'Valid Nigerian number ✓';
   } else {
-    status.textContent = '✕'; status.style.display = 'block'; status.style.color = 'var(--red)';
-    input.style.borderColor = 'var(--red)'; hint.style.color = 'var(--red)';
-    hint.textContent = val.length < 7 ? 'Keep typing…' : 'Must start with 07, 08, 09, +234 — 11 digits';
+    status.textContent = '✕'; status.style.color = 'var(--red)';
+    input.classList.remove('qfield-valid'); input.classList.add('qfield-invalid');
+    hint.style.color = result.message === 'Keep typing…' ? 'var(--grey)' : 'var(--red)';
+    hint.textContent = result.message;
   }
 }
 
 async function submitQualifier() {
-  const first = document.getElementById('qfirst').value.trim();
-  const last  = document.getElementById('qlast').value.trim();
-  const phone = document.getElementById('qphone').value.trim();
-  const city  = document.getElementById('qcity').value.trim();
-  const errEl = document.getElementById('qerr5');
+  const firstEl = document.getElementById('qfirst');
+  const lastEl  = document.getElementById('qlast');
+  const phoneEl = document.getElementById('qphone');
+  const cityEl  = document.getElementById('qcity');
+  const errEl   = document.getElementById('qerr5');
 
-  if (!first || !last || !phone || !city) {
-    errEl.textContent = 'Please fill in all fields to continue.';
+  // Re-validate every field the moment the button is pressed — never trust that the
+  // button's disabled state alone kept bad data out (a field could be filled by
+  // autofill or programmatically without firing oninput).
+  const checks = [
+    { el: firstEl, hintId: 'qfirstHint', result: validateNameValue(firstEl.value),  label: 'First name' },
+    { el: lastEl,  hintId: 'qlastHint',  result: validateNameValue(lastEl.value),   label: 'Last name' },
+    { el: phoneEl, hintId: 'qphoneHint', result: validatePhoneValue(phoneEl.value), label: 'WhatsApp number' },
+    { el: cityEl,  hintId: 'qcityHint',  result: validateCityValue(cityEl.value),   label: 'City/State' },
+  ];
+
+  const firstBad = checks.find(c => !c.result.valid);
+  if (firstBad) {
+    errEl.textContent = firstBad.label + ': ' + (firstBad.result.message === 'Keep typing…' ? 'This field is required.' : firstBad.result.message);
     errEl.style.display = 'block';
+    firstBad.el.classList.add('qfield-invalid');
+    firstBad.el.focus();
+    checkQ5Valid();
     return;
   }
 
-  const phoneClean = phone.replace(/[\s\-().]/g, '');
-  const ngPattern = /^(\+?234|0)(7[0-9]|8[0-9]|9[0-9])[0-9]{8}$/;
-  if (!ngPattern.test(phoneClean)) {
-    errEl.textContent = 'Enter a valid Nigerian WhatsApp number (e.g. 08012345678 or +2348012345678).';
-    errEl.style.display = 'block';
-    document.getElementById('qphone').focus();
-    return;
-  }
+  const first = firstEl.value.trim().replace(/\s+/g, ' ');
+  const last  = lastEl.value.trim().replace(/\s+/g, ' ');
+  const phone = phoneEl.value.trim();
+  const city  = cityEl.value.trim().replace(/\s+/g, ' ');
 
   errEl.style.display = 'none';
   const btn = document.getElementById('qSubmitBtn');
