@@ -64,8 +64,8 @@ const OFFER_CONFIG = {
   webhookUrl: "https://hook.us2.make.com/yc551ya9rm1jboam8eudm50xvv81egft",
 
   tracking: {
-    metaPixelId: "2252101838924260",
-    ga4MeasurementId: "G-62DKYP07HR"
+    metaPixelId: "1077953881329338",
+    ga4MeasurementId: "G-TZ6FE345VT"
   },
 
   // §3.3 — the only section of this file meant to change mid-week. Update
