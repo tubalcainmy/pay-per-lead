@@ -1103,7 +1103,7 @@ footer a:hover{text-decoration:underline;}
       <!-- Qualified result — confirms discounted slot per §3.2 -->
       <div class="qresult" id="qQualified">
         <div class="ricon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <h3>You're  Let's Confirm Your City</h3>
+        <h3>You're In Let's Confirm Your City</h3>
         <div class="qslot-confirm" id="qSlotConfirm"></div>
         <p>Message us on WhatsApp now with your details already filled in. We'll confirm your city and territory, and if it's open, walk you through the deposit and launch timeline.</p>
         <a href="https://wa.me/2348029234994" id="qWhatsAppLink" target="_blank" class="btn btn-primary btn-block">Message Us on WhatsApp →</a>
@@ -1112,7 +1112,7 @@ footer a:hover{text-decoration:underline;}
       <div class="qresult soft" id="qSoftInfo">
         <div class="ricon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 6.1H3M21 12.1H3M15.1 18H3"/></svg></div>
         <h3>Let's Talk Firs No Pressure</h3>
-        <p>Sounds like you'd like more information before deciding on payment options. That's completely fine — message us on WhatsApp and we'll walk you through exactly how the programme works, no application needed yet.</p>
+        <p>Sounds like you'd like more information before deciding on payment options. That's completely fine message us on WhatsApp and we'll walk you through exactly how the programme works, no application needed yet.</p>
         <a href="https://wa.me/2348029234994" id="qSoftWhatsAppLink" target="_blank" class="btn btn-secondary btn-block">Chat on WhatsApp →</a>
       </div>
 
@@ -1157,11 +1157,11 @@ function initStaticContent(){
     'Your city is yours alone while your campaign is active and you are taking at least ' + OFFER_CONFIG.territory.volumeFloorPerMonth +
     ' verified buyers per month. Below that, the slot returns to the pool with ' + OFFER_CONFIG.territory.noticeDays + ' days written notice.';
   document.getElementById('faqPauseAnswer').textContent =
-    'Pausing is free and immediate — message us and we pause your campaign that day, no cancellation fee. The only condition is on the exclusivity: a territory held below ' +
+    'Pausing is free and immediate message us and we pause your campaign that day, no cancellation fee. The only condition is on the exclusivity: a territory held below ' +
     OFFER_CONFIG.territory.volumeFloorPerMonth + ' verified buyers per month for two consecutive months returns to the pool, with ' + OFFER_CONFIG.territory.noticeDays +
     ' days written notice before that happens. You only ever pay for buyers already delivered.';
   document.getElementById('faqDepositAnswer').textContent =
-    'When your ad balance runs low, we contact you with a performance update — buyers delivered, cost per buyer, ad performance — and you decide whether to top up. No automatic renewals, no surprise charges. Your city slot stays locked as long as your campaign is active and above the ' +
+    'When your ad balance runs low, we contact you with a performance update buyers delivered, cost per buyer, ad performance and you decide whether to top up. No automatic renewals, no surprise charges. Your city slot stays locked as long as your campaign is active and above the ' +
     OFFER_CONFIG.territory.volumeFloorPerMonth + '-buyer/month floor.';
 
   // City strip + FAQ cities answer — same source, never drift within this page
@@ -1175,7 +1175,7 @@ function initStaticContent(){
     if (c.open) openCities.push(c.name);
   });
   document.getElementById('faqCitiesAnswer').textContent = openCities.length
-    ? 'We currently have open slots in ' + openCities.join(', ') + '. Each territory has one exclusive slot — apply and we confirm if yours is still available. New territories open regularly as demand grows.'
+    ? 'We currently have open slots in ' + openCities.join(', ') + '. Each territory has one exclusive slot apply and we confirm if yours is still available. New territories open regularly as demand grows.'
     : 'All current territories are taken. Apply anyway and we will notify you the moment a slot opens near you.';
 }
 </script>
@@ -1280,13 +1280,13 @@ function renderScarcity(){
 
   // 5) Exit intent modal (content set when it's actually shown — see exit intent script — but keep body pre-filled as fallback)
   document.getElementById('exitBody').innerHTML = state === 'sold-out'
-    ? 'This week’s ' + cfg.slotsTotal + ' discounted slots are taken — but full-price applications are still open, and the next discounted window opens ' + (cfg.nextWindowOpensAt ? formatDate(cfg.nextWindowOpensAt) : 'soon') + '.'
+    ? 'This week’s ' + cfg.slotsTotal + ' discounted slots are taken but full-price applications are still open, and the next discounted window opens ' + (cfg.nextWindowOpensAt ? formatDate(cfg.nextWindowOpensAt) : 'soon') + '.'
     : '<strong>' + slotsLine + '</strong> at ' + fmtNaira(cfg.tier2DiscountPrice) + ' Tier 2 pricing. ' + (countdownLine ? countdownLine + '.' : '') + ' Don’t lose your spot.';
 
   // FAQ scarcity answer
   const faqEl = document.getElementById('faqScarcityAnswer');
   if (faqEl) {
-    faqEl.textContent = 'This week’s ₦5,000 Tier 2 price is locked in for your first 30 buyers once you launch during ' + cfg.label + '. After that, Tier 2 reverts to the standard ' + fmtNaira(cfg.tier2StandardPrice) + ' — stated here so there is no surprise in month two.';
+    faqEl.textContent = 'This week’s ₦5,000 Tier 2 price is locked in for your first 30 buyers once you launch during ' + cfg.label + '. After that, Tier 2 reverts to the standard ' + fmtNaira(cfg.tier2StandardPrice) + '  stated here so there is no surprise in month two.';
   }
 }
 
@@ -1296,7 +1296,7 @@ function currentSlotClaim(){
   if (state === 'open' || state === 'last-slot') {
     return { claimed: true, text: 'You’ve locked in Tier 2 pricing at ' + fmtNaira(cfg.tier2DiscountPrice) + ' per buyer for your first 30 buyers (' + cfg.label + ').' };
   }
-  return { claimed: false, text: 'This week’s discounted Tier 2 slots are gone — you’re applying at standard pricing, ' + fmtNaira(cfg.tier2StandardPrice) + ' per Tier 2 buyer. We’ll confirm your city on WhatsApp.' };
+  return { claimed: false, text: 'This week’s discounted Tier 2 slots are gone you’re applying at standard pricing, ' + fmtNaira(cfg.tier2StandardPrice) + ' per Tier 2 buyer. We’ll confirm your city on WhatsApp.' };
 }
 </script>
 <script>
